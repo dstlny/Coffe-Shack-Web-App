@@ -1,8 +1,8 @@
 <?php 
 session_start();
-$hostname = 'localhost'; 
-$username = 'root'; 
+$hostname = ''******';'; 
+$username = ''******';'; 
 $password = ''; 
-$databaseName = 'c3518706'; 
+$databaseName = '******'; 
 $connection = mysqli_connect($hostname, $username, $password, $databaseName) or exit("Unable to connect to database!");
 ?>
