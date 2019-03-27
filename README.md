@@ -6,8 +6,10 @@
 - Easily maintainable.
 - Easily customisable layout.
 - Languages used: PHP (OOP and Procedural), CSS, JS, JQuery, HTML, SQL.
-- In the process currently of porting this across to Oracle, so we can create a web-management interface.
+
 - **Oracle source code has been implemented. You can find this in the `coffee-shack-source-oracle` folder.**
+- The Oracle and MySQL implementation are identical. They are just using two different databases, one being EROS and the other being MySQL. Only real change is swapping around functions from MySQLi equivalents to OCI equivalents.
+
 
 Created: 21/11/2018 by Luke Elam (@dstlny)
 
