@@ -1,9 +1,19 @@
 </div>
+</div>
 <div class="bottomnav">
-  <a href="../pages/home.php">Home</a>
-  <a href="../pages/menu.php">Order</a>
-  <a href="#stores">Stores</a>
-  <a href="../php/userAccount.php">Account</a>
+  <?php
+    if(isset($_SESSION['loggedIn'])){
+        echo '<a href="../pages/menu.php">Order</a>';
+        echo '<a href="#stores">Stores</a>';
+        echo '<a href="../php/userAccount.php">Account</a>';
+    } elseif(isset($_SESSION['adminLoggedIn'])){ 
+        echo '<a href="../pages/menu.php">Order</a>';
+        echo '<a href="#stores">Stores</a>';
+        echo '<a href="../php/userAccount.php">Account</a>';
+    } else{
+        echo '<a href="../pages/home.php">Home</a>';
+    }
+    ?>
 </div> 
 </body>
 </html>

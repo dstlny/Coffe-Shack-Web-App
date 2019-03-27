@@ -21,12 +21,14 @@ $obj = new myFunctions();
 <!--Simple JQuery accordion script.-->
 <script>
   $(function() {
-    $("#inner-accordion, #outer-accordion, #accordion, #inner-accordion-bakery").accordion({
+    $("#inner-accordion, #outer-accordion, #accordion, #inner-accordion-bakery, #staff-accordion, #basket-accordion").accordion({
       collapsible: true,
-      heightStyle: 'content'
+      heightStyle: 'content',
+      active: false
     });
   } );
 </script>
+
    
 <!--This script only triggers if the user scrolls up and content hits the header.
 Only here to stop a nasty bug with JQuery accordions ovelapping the header--> 
@@ -74,7 +76,24 @@ Only here to stop a nasty bug with JQuery accordions ovelapping the header-->
 <!--Header navbar-->
 <nav class="nav-down">
     <a style="float:left; background:#333; color:#fff;pointer-events: none; cursor: default;">COFFEE SHACK</a>
-    <a href="../pages/home.php">HOMEPAGE</a>
+    <?php
+       $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+       $url = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+      
+       if(strpos($url, 'home.php') !== false && isset($_SESSION['adminLoggedIn'])){
+          echo '<a href="../pages/home.php">STAFF PAGE</a>';
+       } elseif(strpos($url, 'home.php') !== false){
+          echo '<a href="../pages/home.php">HOMEPAGE</a>';
+       } elseif(strpos($url, 'menu.php') !== false){
+          echo '<a href="../pages/menu.php">MENU</a>';
+       } elseif(strpos($url, 'payment.php') !== false){
+          echo '<a href="../pages/payment.php">ORDER PAYMENT</a>';
+       }  elseif(strpos($url, 'register-form.php') !== false){
+          echo '<a href="../php/register-form.php">USER REGISTRATION</a>';
+       }  elseif(strpos($url, 'userAccount.php') !== false){
+          echo '<a href="../php/userAccount.php">ACCOUNT DETAILS</a>';
+       }
+    ?>
 </nav>
 <body>
 <div class="main">
