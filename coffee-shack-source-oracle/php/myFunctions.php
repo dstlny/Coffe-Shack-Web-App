@@ -1,3 +1,5 @@
+// This class consists of the functions that are used within the implemntation of the web-aplication.
+
 <?php
 class myFunctions {
     
