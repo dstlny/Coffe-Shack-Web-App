@@ -7,7 +7,7 @@
 - Easily customisable layout.
 - Languages used: PHP (OOP and Procedural), CSS, JS, JQuery, HTML, SQL.
 - In the process currently of porting this across to Oracle, so we can create a web-management interface.
--- Oracle source code has been implemented. You can find this in the `coffee-shack-source-oracle` folder.
+-# Oracle source code has been implemented. You can find this in the `coffee-shack-source-oracle` folder.
 
 Created: 21/11/2018 by Luke Elam (@dstlny)
 
