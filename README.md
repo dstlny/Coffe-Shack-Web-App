@@ -8,8 +8,16 @@
 - Languages used: PHP (OOP and Procedural), CSS, JS, JQuery, HTML, SQL.
 
 - **Oracle source code has been implemented. You can find this in the `coffee-shack-source-oracle` folder.**
-- The Oracle and MySQL implementation are identical. They are just using two different databases, one being EROS and the other being MySQL. Only real change is swapping around functions from MySQLi equivalents to OCI equivalents.
+- The Oracle and MySQL implementation are **No-Longer identical** --identical--. The Oracle version of this application adds more features than the original MySQL implementation.
 
+## New Features in Oracle Implementation:
+- More functions within the `myFunctions.php` class (mainly simple stuff.
+- Customer table selection
+- Order-completion notification for the user
+And crushes the following bugs:
+- Users being able to refresh and order more than once.
+- OrderID sometimes not being visibile to users.
+- Some interactions with Database not working 100% of the time (Oracle is rather... finnicky).
 
 Created: 21/11/2018 by Luke Elam (@dstlny)
 
