@@ -29,9 +29,8 @@ if (isset($_POST['subLogin'])) {
         } else {
         
          //check customer exists
-         $query  = "SELECT * FROM CUSTOMER WHERE EmailAddress = :email";
+         $query  = "SELECT * FROM CUSTOMER WHERE EmailAddress = '$mailuid'";
          $result = oci_parse($connection, $query);
-         oci_bind_by_name($result, ":email", $mailuid);
 		 
          if(oci_execute($result)){
              if($row = oci_fetch_assoc($result)){
@@ -57,17 +56,16 @@ if (isset($_POST['subLogin'])) {
                  }
              } else{
                 //check staff/admin exists
-                $query  = "SELECT * FROM STAFF WHERE EMAIL_ADDRESS = :email";
+                $query  = "SELECT * FROM STAFF WHERE Email_Address = '$mailuid'";
                 $result = oci_parse($connection, $query);
-                oci_bind_by_name($result, ":email", $mailuid);
-                 
+                
                 if(oci_execute($result)){
                     if($row = oci_fetch_assoc($result)){
                         if($hash == $row['PASSWORD']){
                             $_SESSION['errors']['success'] = "<br><b style=\"color: green; font-size: 12px;\">Succesfully logged in!</b>";
                             $_SESSION['adminLoggedIn'] = TRUE;
                             $_SESSION['adminUserName'] = $row['EMAIL_ADDRESS'];
-                            $_SESSION['adminID'] = $row['USER_ID'];
+                            $_SESSION['adminID'] = $row['STAFF_ID'];
         					oci_free_statement($result);
         					oci_close($connection);
                             header("location: ../pages/home.php");

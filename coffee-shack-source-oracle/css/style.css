@@ -16,7 +16,7 @@ hr{
 }
 
 html {
-  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .nav-up {
@@ -57,7 +57,7 @@ html {
 }
 
 nav  {
-    height: 37px;
+    height: 43px;
     position: fixed;
     top: 0;
     transition: top 0.1s linear ;
@@ -84,7 +84,8 @@ nav a:hover {
     border: 1px solid white;
     max-width: 400px;
     text-align: center;
-    margin:auto;
+    margin: auto;
+    margin-top: 60px;
 }
 
 .userDetails fieldset{
@@ -109,6 +110,7 @@ nav a:hover {
 
 .register-container{
     margin:auto;
+    margin-top: 30px;
     max-width: auto;
     max-height: 80%;
 }

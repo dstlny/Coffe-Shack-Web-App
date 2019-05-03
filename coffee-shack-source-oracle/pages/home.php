@@ -3,7 +3,7 @@
 
     if(isset($_SESSION['loggedIn'])){
        require_once '../php/login-form.php';
-    } elseif(isset($_SESSION['adminLoggedIn'])){
+    } elseif(isset($_SESSION['adminLoggedIn']) && !empty($_POST['orderID'])){
        require_once '../pages/staffPage.php';
     } else {
        require_once '../php/login-form.php';

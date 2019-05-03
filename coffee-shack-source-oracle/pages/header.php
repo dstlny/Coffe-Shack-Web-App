@@ -81,7 +81,7 @@ Only here to stop a nasty bug with JQuery accordions ovelapping the header-->
        $url = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
       
        if(strpos($url, 'home.php') !== false && isset($_SESSION['adminLoggedIn'])){
-          echo '<a href="../pages/home.php">STAFF PAGE</a>';
+          echo '<a href="../pages/staffPage.php">STAFF PAGE</a>';
        } elseif(strpos($url, 'home.php') !== false){
           echo '<a href="../pages/home.php">HOMEPAGE</a>';
        } elseif(strpos($url, 'menu.php') !== false){
@@ -92,6 +92,8 @@ Only here to stop a nasty bug with JQuery accordions ovelapping the header-->
           echo '<a href="../php/register-form.php">USER REGISTRATION</a>';
        }  elseif(strpos($url, 'userAccount.php') !== false){
           echo '<a href="../php/userAccount.php">ACCOUNT DETAILS</a>';
+       }  elseif(strpos($url, 'staffPage.php') !== false){
+          echo '<a href="../pages/staffPage.php">STAFF PAGE</a>';
        }
     ?>
 </nav>
