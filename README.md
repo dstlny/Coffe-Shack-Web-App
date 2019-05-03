@@ -7,10 +7,11 @@
 - Easily customisable layout.
 - Languages used: PHP (OOP and Procedural), CSS, JS, JQuery, HTML, SQL.
 
-- **Oracle source code has been implemented. You can find this in the `coffee-shack-source-oracle` folder.**
-- The Oracle and MySQL implementation are **No-Longer identical** --identical--. The Oracle version of this application adds more features than the original MySQL implementation.
+## **Oracle source code has been implemented.**
+- You can find this in the `coffee-shack-source-oracle` folder.
+- The Oracle and MySQL implementation are **No-Longer identical** ~~identical~~. The Oracle version of this application adds more features than the original MySQL implementation.
 
-## New Features in Oracle Implementation:
+## New Features in Oracle Implementation
 - More functions within the `myFunctions.php` class (mainly simple stuff.
 - Customer table selection
 - Order-completion notification for the user
