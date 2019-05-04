@@ -15,7 +15,9 @@
 - More functions within the `myFunctions.php` class (mainly simple stuff.
 - Customer table selection
 - Order-completion notification for the user
-<br>And crushes the following bugs:
+
+### And crushes the following bugs:
+
 - Users being able to refresh and order more than once.
 - OrderID sometimes not being visibile to users.
 - Some interactions with Database not working 100% of the time (Oracle is rather... finnicky).
