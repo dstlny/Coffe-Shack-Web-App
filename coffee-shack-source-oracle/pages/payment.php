@@ -10,9 +10,12 @@ include '../pages/header.php';
         document.getElementById("minutes").innerHTML=pad(parseInt(sec/60,10));
         }, 1000);
 </script>
-<?php              
+<?php     
+
+//Make sure that the order arrays are set and are occupied, else redirect back to the appropriate page.
 if(!empty($_SESSION['mainOrder']) || !empty($_SESSION['sideOrder'])){
     echo '<br><div id="#basket-accordion"><h3 style="font-size:15px;">Your Order, Order ID: '.$_SESSION['orderID'].'</h3><div>';
+    //Prints the users final, confirmed order.
     $obj->printFinal();
 
     if(!isset($_SESSION['ordered'])){
@@ -20,15 +23,23 @@ if(!empty($_SESSION['mainOrder']) || !empty($_SESSION['sideOrder'])){
 	$total = $_SESSION['orderTotal'];
 	$_SESSION['tblNo'] = $_POST['tblNo'];
 	$current_timestamp = date('Y-m-d H:i:s'); 
+	    
+	//Get insert users order to the database.
 	$obj->step1($id,$total,$current_timestamp,'N',$_SESSION['tblNo'],$userID,NULL);
+	
+	//Get the next OrderID.
 	$answer = $obj->returnNextID();
-
+	    
+	//Loop through the order-items of the mainOrder session array
+	//Inserting them into order-items table.
 	for($i = 0; $i < count($_SESSION['mainOrder']); $i++){
 	    foreach($_SESSION['mainOrder'][$i] as $key=>$value){
 	            $obj->step2($id,$value,$key,$answer);
 	    }
 	}
 
+	//Loop through the order-items of the sideOrder session array
+	//Inserting them into order-items table.
 	for($i = 0; $i < count($_SESSION['sideOrder']); $i++){
 	    foreach($_SESSION['sideOrder'][$i] as $key=>$value){
 	            $obj->step2($id,$value,$key,$answer);
