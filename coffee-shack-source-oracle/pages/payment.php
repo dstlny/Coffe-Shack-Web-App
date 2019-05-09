@@ -13,11 +13,9 @@ include '../pages/header.php';
 <?php              
 if(!empty($_SESSION['mainOrder']) || !empty($_SESSION['sideOrder'])){
     echo '<br><div id="#basket-accordion"><h3 style="font-size:15px;">Your Order, Order ID: '.$_SESSION['orderID'].'</h3><div>';
-    //calling a function inside of the myFiunctions class 
     $obj->printFinal();
 
     if(!isset($_SESSION['ordered'])){
-  	
 	$userID = $_SESSION['userID'];
 	$total = $_SESSION['orderTotal'];
 	$_SESSION['tblNo'] = $_POST['tblNo'];
@@ -37,8 +35,8 @@ if(!empty($_SESSION['mainOrder']) || !empty($_SESSION['sideOrder'])){
 	    }
 	}
 
+	//here to make sure the order doesn't go through more than once.
 	$_SESSION['ordered'] = '1';
-
     }
 
     if($obj->getOrderStatus($_SESSION['orderID']) == 'N' || $obj->getOrderStatus($_SESSION['orderID']) == NULL){
@@ -47,10 +45,11 @@ if(!empty($_SESSION['mainOrder']) || !empty($_SESSION['sideOrder'])){
        echo '<meta http-equiv="Refresh" content="30">';
     } else{
        echo '<div><center><b><p style="font-size: 15px; color: green;">Your order is completed! Please collect your order from the till, citing your Order Number (<b>'.$_SESSION['orderID'].'</b>)!</p></b><br><p style="font-size:12px;" class="loading">Redirecting back to menu, thanks for your order!<span>.</span><span>.</span><span>.</span></p></center></div></div></div>';
-       echo "<meta http-equiv='Refresh' content='4; URL=../pages/menu.php?ClearAll'>";
+       //tell the customer their order is complete, redirect back to menU and clear their current order by appending ?ClearOrder to the URL.
+       echo "<meta http-equiv='Refresh' content='4; URL=../pages/menu.php?ClearOrder'>";
     }
 
-} else{
+} else {
     header('Location: ../pages/menu.php');
 }
 
