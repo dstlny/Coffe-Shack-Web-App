@@ -45,7 +45,7 @@ if(isset($_SESSION['loggedIn']) || isset($_SESSION['adminLoggedIn'])){
        header('Location: ../pages/menu.php');
     }
     
-    //Clears all favourites, redirects to Index page.
+    //Clears necccessary session variables
     if(isset($_GET['ClearAll'])){
        $_SESSION['mainOrder'] = array();
        $_SESSION['sideOrder'] = array();
@@ -54,7 +54,6 @@ if(isset($_SESSION['loggedIn']) || isset($_SESSION['adminLoggedIn'])){
        unset($_SESSION['orderTotal']);
        unset($_SESSION['mainOrder']);
        unset($_SESSION['sideOrder']);
-      // echo '<meta http-equiv="refresh" content="0;url=../pages/menu.php">';
     }
     ?>
     <!--JQuery accordion-->
