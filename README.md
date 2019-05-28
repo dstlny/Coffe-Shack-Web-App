@@ -15,7 +15,7 @@
   - `returnNextID()` - returns the next OrderID.
   - `getOrderStatus($id)` - `$id` (Order ID) as input, returns status of a given order.
   - `returnCurrID()` - returns the current OrderID (not next).
-  - `checkOrders()` - returns `(Boolean)`, checks if there are any incomplete orders.
+  - `checkOrders()` - returns `true` if incomplete orders exist, `false` if not
 - Customer table selection
 - Order-completion notification for the user
 
