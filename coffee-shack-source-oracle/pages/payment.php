@@ -14,7 +14,7 @@ include '../pages/header.php';
 
 //Make sure that the order arrays are set and are occupied, else redirect back to the appropriate page.
 if(!empty($_SESSION['mainOrder']) || !empty($_SESSION['sideOrder'])){
-    echo '<br><div id="#basket-accordion"><h3 style="font-size:15px;">Your Order, Order ID: '.$_SESSION['orderID'].'</h3><div>';
+    echo "<br><div id=\"#basket-accordion\"><h3 style=\"font-size:15px;\">Order ID: {$_SESSION['orderID']}</h3><div>";
     //Prints the users final, confirmed order.
     $obj->printFinal();
 
@@ -55,7 +55,7 @@ if(!empty($_SESSION['mainOrder']) || !empty($_SESSION['sideOrder'])){
        echo '<div><center><b><p style="font-size: 15px;">This page will refresh every 30 seconds.</p></b></center></div>';
        echo '<meta http-equiv="Refresh" content="30">';
     } else{
-       echo '<div><center><b><p style="font-size: 15px; color: green;">Your order is completed! Please collect your order from the till, citing your Order Number (<b>'.$_SESSION['orderID'].'</b>)!</p></b><br><p style="font-size:12px;" class="loading">Redirecting back to menu, thanks for your order!<span>.</span><span>.</span><span>.</span></p></center></div></div></div>';
+       echo "<div><center><b><p style=\"font-size: 15px; color: green;\">Your order is completed! Please collect your order from the till, citing your Order Number (<b>{$_SESSION['orderID']}</b>)!</p></b><br><p style=\"font-size:12px;\" class=\"loading\">Redirecting back to menu, thanks for your order!<span>.</span><span>.</span><span>.</span></p></center></div></div></div>";
        //tell the customer their order is complete, redirect back to menU and clear their current order by appending ?ClearOrder to the URL.
        echo "<meta http-equiv='Refresh' content='4; URL=../pages/menu.php?ClearAll'>";
     }
