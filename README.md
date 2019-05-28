@@ -13,7 +13,7 @@
 ## New Features in Oracle Implementation
 - Adds the following functions, for use by developers:
   - `returnNextID()` - returns largest OrderID incremented by 1.
-  - `getOrderStatus($id)` - returns `Y` if an order is marked as complete, `N` if not. 
+  - `getOrderStatus($id)` - `$id` Order ID, returns `Y` if an order is marked as complete, `N` if not. 
   - `returnCurrID()` - returns the largest OrderID (current).
   - `checkOrders()` - returns `true` if incomplete orders exist, `false` if not
 - Customer table selection
