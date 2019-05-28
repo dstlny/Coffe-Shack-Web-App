@@ -11,7 +11,7 @@ class myFunctions {
 
    public function getOrderStatus($id){
       include '../dbcon/init.php';
-      $stid = oci_parse($connection, "SELECT * FROM ORDERS WHERE ORDER_ID = $id");
+      $stid = oci_parse($connection, "SELECT ORDER_COMPLETE FROM ORDERS WHERE ORDER_ID = $id");
       oci_execute($stid);
       $row = oci_fetch_assoc($stid);
       return $row['ORDER_COMPLETE'];
@@ -52,29 +52,29 @@ class myFunctions {
       echo "         <!-- TABLE HEADER END -->\n\n";
 
       while ($row = oci_fetch_assoc($stid)) {
-        echo "\n           <!-- TABLE ROW ".$i." START -->\n";
-        echo '              <tr><td>' . $row['PRODUCT_NAME'] .'</td>'."\n".'              <td>' .'&pound;'.number_format($row['PRICE'], 2). '</td>'."\n";
-        echo "              <td><img src='../images/" . $row['PRODUCT_IMAGE'] . "'/></td>"."\n";
+        echo "\n           <!-- TABLE ROW {$i} START -->\n";
+        echo "              <tr><td>{$row['PRODUCT_NAME']}</td>\n<td>&pound;".number_format($row['PRICE'], 2). "</td>\n";
+        echo "              <td><img align=\"middle\" src=\"../images/{$row['PRODUCT_IMAGE']}\"/></td>\n";
         if($category == "Bakery"){
-          echo '<td><form method="get" action="#">
-          <select name="bkQty">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          </select><input type="hidden" name="bkID" value="'.$row['PRODUCT_ID'].'">'; 
-          echo '    <button type="submit" class="buttonAsLink">Add to basket</button></form></td>';
-          echo "\n           <!-- TABLE ROW ".$i." END -->\n";$i++;
+          echo "<td><form method=\"get\" action=\"#\">
+                          <select name=\"bkQty\">
+                            <option value=\"1\">1</option>
+                            <option value=\"2\">2</option>
+                            <option value=\"3\">3</option>
+                            <option value=\"4\">4</option>
+                      </select><input type=\"hidden\" name=\"bkID\" value=\"{$row['PRODUCT_ID']}\">"; 
+                echo '    <button type="submit" class="buttonAsLink">Add to basket</button></form></td>';
+                echo "\n           <!-- TABLE ROW {$i} END -->\n";$i++;
         } else {
-          echo '<td><form method="get"  action="#">
-          <select name="qty">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          </select><input type="hidden" name="id" value="'.$row['PRODUCT_ID'].'">'; 
-          echo '              <button type="submit" class="buttonAsLink">Add to basket</button></form></td>';
-          echo "\n           <!-- TABLE ROW ".$i." END -->\n";$i++;
+          echo "<td><form method=\"get\" action=\"#\">
+                          <select name=\"qty\">
+                            <option value=\"1\">1</option>
+                            <option value=\"2\">2</option>
+                            <option value=\"3\">3</option>
+                            <option value=\"4\">4</option>
+                      </select><input type=\"hidden\" name=\"id\" value=\"{$row['PRODUCT_ID']}\">"; 
+                echo '    <button type="submit" class="buttonAsLink">Add to basket</button></form></td>';
+                echo "\n           <!-- TABLE ROW {$i} END -->\n";$i++;
         }
       }
       echo "\n     <!-- TABLE FOOTER START -->\n";
@@ -96,14 +96,12 @@ class myFunctions {
         $stid = oci_parse($connection, $query);
         oci_execute($stid);
         $row = oci_fetch_assoc($stid);
-        echo '<div class="userDetails"><form><fieldset><legend>Stored details</legend><label for="Email">Staff Email</label><input type="text" name="Email" value="'; 
-        echo $row['EMAIL_ADDRESS'].'" readonly></form></div>';
+        echo "<div class=\"userDetails\"><form><fieldset><legend>Stored details</legend><label for=\"Email\">Staff Email</label><input type=\"text\" name=\"Email\" value=\"{$row['EMAIL_ADDRESS']}\" readonly></form></div>";
         echo  '<center><p style="font-size:13px;">Want to logout? <a href="../php/logout.php" style="font-size:13px;">Logout</a></p></center>';
       } else{
-        echo '<div class="userDetails"><form><fieldset><legend>Stored details</legend><label for="Email">Email</label><input type="text" name="Email" value="'; 
-        echo $row['EMAILADDRESS'].'" readonly><br><hr><label for="name">Fullname</label><input type="text" name="name" value="'; 
-        echo $row['USER_FORNAME'].' '.$row['USER_SURNAME'].'" readonly></fieldset></form>';
-        echo  '<center><p style="font-size:13px;">Want to logout? <a href="../php/logout.php" style="font-size:13px;">Logout</a></p></center></div>';
+        echo "<div class=\"userDetails\"><form><fieldset><legend>Stored details</legend><label for=\"Email\">Email</label><input type=\"text\" name=\"Email\" 
+            value=\"{$row['EMAILADDRESS']}\" readonly><br><hr><label for=name\">Fullname</label><input type=\"text\" name=\"name\" value=\"{$row['USER_FORNAME']} {$row['USER_SURNAME']}\" readonly></fieldset></form>";
+            echo  '<center><p style="font-size:13px;">Want to logout? <a href="../php/logout.php" style="font-size:13px;">Logout</a></p></center></div>';
       }
 
       oci_free_statement($stid);
@@ -118,12 +116,11 @@ class myFunctions {
       }
 
       echo '<div class="userDetails" style="margin-top: 0px;"><div>';
-      echo '<p><p style="font-size: 15px;">Order ID: '.$_SESSION['orderID'].'</p><br>Please select your table number: </p><form method="post" action="../pages/payment.php">
-      <select name="tblNo">';
-      for($i=1; $i < 15; $i++){
-        echo '<option value="'.$i.'">'.$i.'</option>';
-      }
-
+      echo "<p><p style=\"font-size: 15px;\">Order ID: {$_SESSION['orderID']}</p><br>Please select your table number: </p><form method=\post\ action=\../pages/payment.php\">
+      <select name=\"tblNo\">";
+	 for($i=1; $i < 15; $i++){
+	     echo "<option value=\"{$i}\">{$i}</option>";
+	 }
       echo '</select>'; 
       for($i = 0; $i < count($_SESSION['mainOrder']); $i++){
         foreach($_SESSION['mainOrder'][$i] as $key=>$value){
@@ -131,7 +128,7 @@ class myFunctions {
          $stid = oci_parse($connection, $query);
          oci_execute($stid);
           while($row = oci_fetch_assoc($stid)) {
-            echo '<p style="border-right: 1px solid black; border-left: 1px solid black;">'.$value.' x '. $row['PRODUCT_NAME']. '&emsp;&emsp;&emsp;&emsp;&pound;'.number_format($value*$row['PRICE'], 2). '</p><hr>';
+            echo "<p style=\"border-right: 1px solid black; border-left: 1px solid black;\">{$value} x {$row['PRODUCT_NAME']}&emsp;&emsp;&emsp;&pound;".number_format($value*$row['PRICE'], 2)."</p>";
             $total += $row['PRICE'] * $value;
           }
         }
@@ -143,13 +140,13 @@ class myFunctions {
          $stid = oci_parse($connection, $query);
          oci_execute($stid);
            while($row = oci_fetch_assoc($stid)) {
-             echo '<p style="border-right: 1px solid black; border-left: 1px solid black;">'.$value.' x '. $row['PRODUCT_NAME']. '&emsp;&emsp;&emsp;&emsp;&pound;'.number_format($value*$row['PRICE'], 2). '</p><hr>';
+             echo "<p style=\"border-right: 1px solid black; border-left: 1px solid black;\">{$value} x {$row['PRODUCT_NAME']}&emsp;&emsp;&emsp;&pound;".number_format($value*$row['PRICE'], 2)."</p>";
              $total += $row['PRICE'] * $value;
            }
         }
       }
       $_SESSION['orderTotal'] = $total;
-      echo '<br><center><a style="color: black;" href="?ClearAll'.$row['PRODUCT_ID'].'">Remove all</a></center><p style="font-size: 15px; border-right: 1px solid black; border-left: 1px solid black;"><b>Total: £'.number_format($total, 2).'</b></p><button type="submit" class="buttonAsLink">Pay Now!</button><br><br>';
+      echo '<br><center><a style="color: black;" href="?ClearAll">Remove all</a></center><p style="font-size: 15px; border-right: 1px solid black; border-left: 1px solid black;"><b>Total: £'.number_format($total, 2).'</b></p><button type="submit" class="buttonAsLink">Pay Now!</button><br><br>';
       echo '</div></div>';
   }
 
@@ -164,7 +161,7 @@ class myFunctions {
          oci_execute($stid);
            while($row = oci_fetch_assoc($stid)) {
               echo '<p style="border-right: 1px solid black; border-left: 1px solid black;">'.$value.' x '. $row['PRODUCT_NAME']. '&emsp;&emsp;&emsp;&emsp;&pound;'.number_format($value*$row['PRICE'], 2). '</p><hr>';
-              $total += $row['PRICE'] * $value;
+             $total += $row['PRICE'] * $value;
            }
         }
       }
@@ -175,12 +172,12 @@ class myFunctions {
          $stid = oci_parse($connection, $query);
          oci_execute($stid);
            while($row = oci_fetch_assoc($stid)) {
-             echo '<p style="border-right: 1px solid black; border-left: 1px solid black;">'.$value.' x '. $row['PRODUCT_NAME']. '&emsp;&emsp;&emsp;&emsp;&pound;'.number_format($value*$row['PRICE'], 2). '</p><hr>';
+             echo "<p style=\"border-right: 1px solid black; border-left: 1px solid black;\">{$value} x {$row['PRODUCT_NAME']}&emsp;&emsp;&emsp;&emsp;&pound;".number_format($value*$row['PRICE'], 2)."</p><hr>";
              $total += $row['PRICE'] * $value;
            }
         }
       }
-    echo '<p style="font-size: 15px; border-right: 1px solid black; border-left: 1px solid black;"><b>Total: £'.number_format($total, 2).'</b></p>';
+    echo "<p style=\"font-size: 15px; border-right: 1px solid black; border-left: 1px solid black;\"><b>Total: &pound;".number_format($total, 2)."</b></p>";
     echo '</div></div>';
   }
 
@@ -193,13 +190,13 @@ class myFunctions {
       echo '<div class="staff-wrapper">';
       while($row = oci_fetch_assoc($stid)) {
         			//echo '<center><p style="color: red; font-size: 20px;">Currently no customer orders to process!<br>Click <a href="../pages/menu.php">here</a> to go to the menu!</p></center>';
-        echo '<div id="staff-div">
-        <form method="post" action="../php/updateOrder.php">
-        <input type="hidden" name="orderID" value="'.$row['ORDER_ID'].'">
-        <input type="hidden" name="staffID" value="'.$_SESSION['adminID'].'">
-        <h3 style="font-size: 16px; font-weight: bold;">Order '.$row['ORDER_ID'].'&emsp;&emsp;Total: £'.number_format($row['ORDER_TOTAL'],2).'<br>['.$row['ORDER_COMPLETE'].'ot complete]</h3>
+        echo "<div id=\"staff-div\">
+        <form method=\"post\" action=\"../php/updateOrder.php\">
+        <input type=\"hidden\" name=\"orderID\" value=\"{$row['ORDER_ID']}\">
+        <input type=\"hidden\" name=\"staffID\" value=\"{$_SESSION['adminID']}\">
+        <h3 style=\"font-size: 16px; font-weight: bold;\">Order {$row['ORDER_ID']}&emsp;&emsp;Total: &pound;".number_format($row['ORDER_TOTAL'],2)."<br>[Not complete]</h3>
         <hr>
-        <div>';
+        <div>";
         $this->getOrderItemsFromOrderID($row['ORDER_ID']);
         echo '<button type="submit" style="font-size:16px; margin-bottom:15px;" name="subOrder" class="buttonAsLink">Complete Order</button></form></div>
         </div>';
@@ -213,7 +210,7 @@ class myFunctions {
       $stid = oci_parse($connection, $query);
       oci_execute($stid);
       while($row = oci_fetch_assoc($stid)) 
-        echo '<p style="line-height: 0.5; font-size: 10pt" >'.$row['QUANTITY'].' x '. $this->getProductFromForeignKey($row['FK1_PRODUCT_ID']).'</p>';
+        echo "<p style=\"line-height: 0.5;   font-size: 10pt\">{$row['QUANTITY']} x {$this->getProductFromForeignKey($row['FK1_PRODUCT_ID'])}</p>";
   }
 
   public function getProductFromForeignKey($id){
