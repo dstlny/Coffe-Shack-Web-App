@@ -24,8 +24,8 @@ if(!empty($_SESSION['mainOrder']) || !empty($_SESSION['sideOrder'])){
 	$_SESSION['tblNo'] = $_POST['tblNo'];
 	$current_timestamp = date('Y-m-d H:i:s'); 
 	    
-	//Get insert users order to the database.
-	$obj->step1($id,$total,$current_timestamp,'N',$_SESSION['tblNo'],$userID,NULL);
+	//Insert order to the database.
+	$obj->step1($total,$current_timestamp,$_SESSION['tblNo']);
 	
 	//Get the next OrderID.
 	$answer = $obj->returnNextID();
@@ -42,7 +42,7 @@ if(!empty($_SESSION['mainOrder']) || !empty($_SESSION['sideOrder'])){
 	//Inserting them into order-items table.
 	for($i = 0; $i < count($_SESSION['sideOrder']); $i++){
 	    foreach($_SESSION['sideOrder'][$i] as $key=>$value){
-	            $obj->step2($id,$value,$key,$answer);
+	            $obj->step2($value,$key);
 	    }
 	}
 
