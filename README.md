@@ -12,10 +12,10 @@
 
 ## New Features in Oracle Implementation
 - Adds the following functions, for use by developers:
--- `returnNextID()` - returns the next OrderID.
--- `getOrderStatus($id)` - `$id` (Order ID) as input, returns status of a given order.
--- `returnCurrID()` - returns the current OrderID (not next).
--- `checkOrders()` - returns `(Boolean)`, checks if there are any incomplete orders.
+ - `returnNextID()` - returns the next OrderID.
+ - `getOrderStatus($id)` - `$id` (Order ID) as input, returns status of a given order.
+ - `returnCurrID()` - returns the current OrderID (not next).
+ - `checkOrders()` - returns `(Boolean)`, checks if there are any incomplete orders.
 - Customer table selection
 - Order-completion notification for the user
 
