@@ -180,16 +180,36 @@ class myFunctions {
     echo "<p style=\"font-size: 15px; border-right: 1px solid black; border-left: 1px solid black;\"><b>Total: &pound;".number_format($total, 2)."</b></p>";
     echo '</div></div>';
   }
+	
+  public function checkOrders(){
+      include '../dbcon/init.php';
+      
+      $status = false;
+	  
+      $query = "SELECT * FROM ORDERS WHERE ORDER_COMPLETE = 'N'";
+      $stid = oci_parse($connection, $query);
+      oci_execute($stid);
+
+      while($row = oci_fetch_assoc($stid)) {
+	    $status = true;
+      }
+      
+     if(status){
+	return true;
+     } elseif(!status){
+     	return false;
+     }
+	   
+  }
 
   public function printCustomerOrders(){
       include '../dbcon/init.php';
-
+ 	  
       $query = "SELECT * FROM ORDERS WHERE ORDER_COMPLETE = 'N'";
       $stid = oci_parse($connection, $query);
       oci_execute($stid);
       echo '<div class="staff-wrapper">';
       while($row = oci_fetch_assoc($stid)) {
-        			//echo '<center><p style="color: red; font-size: 20px;">Currently no customer orders to process!<br>Click <a href="../pages/menu.php">here</a> to go to the menu!</p></center>';
         echo "<div id=\"staff-div\">
         <form method=\"post\" action=\"../php/updateOrder.php\">
         <input type=\"hidden\" name=\"orderID\" value=\"{$row['ORDER_ID']}\">
