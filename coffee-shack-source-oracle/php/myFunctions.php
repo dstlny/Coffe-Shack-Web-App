@@ -194,9 +194,9 @@ class myFunctions {
 	    $status = true;
       }
       
-     if(status){
+     if($status){
 	return true;
-     } elseif(!status){
+     } elseif(!$status){
      	return false;
      }
 	   
