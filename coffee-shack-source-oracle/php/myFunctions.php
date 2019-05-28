@@ -25,7 +25,7 @@ class myFunctions {
       return $row['MAXID'];
   }
 
-  public function step1($id,$total,$current_timestamp,$userID,$table,$staffID){
+  public function step1($total,$current_timestamp,$table){
       include '../dbcon/init.php';
       $userID = $_SESSION['userID'];
       $query = "INSERT INTO ORDERS VALUES(ORDERS_SEQ.nextval,$table,$total,TIMESTAMP '$current_timestamp','N',$userID,NULL)";
@@ -33,7 +33,7 @@ class myFunctions {
       oci_execute($stid);
   }
 
-  public function step2($id,$qty,$prod_id,$order_id){
+  public function step2($qty,$prod_id){
       include '../dbcon/init.php';
       $query = "INSERT INTO ORDER_ITEMS VALUES (ORDER_ITEMS_SEQ.nextval,$qty,$prod_id, ORDERS_SEQ.currval)";
       $stid = oci_parse($connection, $query);
