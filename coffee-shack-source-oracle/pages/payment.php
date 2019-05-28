@@ -34,7 +34,7 @@ if(!empty($_SESSION['mainOrder']) || !empty($_SESSION['sideOrder'])){
 	//Inserting them into order-items table.
 	for($i = 0; $i < count($_SESSION['mainOrder']); $i++){
 	    foreach($_SESSION['mainOrder'][$i] as $key=>$value){
-	            $obj->step2($id,$value,$key,$answer);
+	            $obj->step2($value,$key);
 	    }
 	}
 
