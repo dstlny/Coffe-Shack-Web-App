@@ -4,7 +4,6 @@
 - Shopping-cart System.
 - Users can only access this basket/cart system if they have saved ONE or MORE products, otherwise they'll be redirected to Index.
 - Easily maintainable.
-- Easily customisable layout.
 - Languages used: PHP (OOP and Procedural), CSS, JS, JQuery, HTML, SQL.
 
 ## **Oracle source code has been implemented.**
@@ -12,12 +11,15 @@
 - The Oracle and MySQL implementation are **No-Longer identical** ~~identical~~. The Oracle version of this application adds more features than the original MySQL implementation.
 
 ## New Features in Oracle Implementation
-- More functions within the `myFunctions.php` class (mainly simple stuff.
+- Adds the following functions, for use by developers:
+-- `returnNextID()` - returns the next OrderID.
+-- `getOrderStatus($id)` - `$id` (Order ID) as input, returns status of a given order.
+-- `returnCurrID()` - returns the current OrderID (not next).
+-- `checkOrders()` - returns `(Boolean)`, checks if there are any incomplete orders.
 - Customer table selection
 - Order-completion notification for the user
 
 ### And crushes the following bugs:
-
 - Users being able to refresh and order more than once.
 - OrderID sometimes not being visibile to users.
 - Some interactions with Database not working 100% of the time (Oracle is rather... finnicky).
