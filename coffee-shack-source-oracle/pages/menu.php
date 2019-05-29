@@ -30,7 +30,7 @@ if(isset($_SESSION['loggedIn']) || isset($_SESSION['adminLoggedIn'])){
     //Restricting the amount of cofee orders the user can submit to 4 
     //Relay a simple message stating this.
     if(count($_SESSION['mainOrder']) > 4){
-       echo '<script>alert("You cannot add more than 3 items at a time!");</script>';
+       echo '<script>alert("You cannot add more than 4 items at a time from the coffee section!");</script>';
        $index = array_search($_GET['id'], $_SESSION['mainOrder']);
        array_splice($_SESSION['mainOrder'], $index, 1);
        header('Location: ../pages/menu.php');
@@ -39,7 +39,7 @@ if(isset($_SESSION['loggedIn']) || isset($_SESSION['adminLoggedIn'])){
     //Restricting the amount of orders from the bakery the user can submit to 4.
     //Relay a simple message stating this.
     if(count($_SESSION['sideOrder']) > 4){
-       echo '<script>alert("You cannot add more than 3 items at a time!");</script>';
+       echo '<script>alert("You cannot add more than 4 items at a time from the bakery section!");</script>';
        $index = array_search($_GET['bkID'], $_SESSION['sideOrder']);
        array_splice($_SESSION['sideOrder'], $index, 1);
        header('Location: ../pages/menu.php');
@@ -121,14 +121,14 @@ if(isset($_SESSION['loggedIn']) || isset($_SESSION['adminLoggedIn'])){
         </div>
     </div>
     <?php              
-            if(!empty($_SESSION['mainOrder']) || !empty($_SESSION['sideOrder'])){
-                echo '<div id="basket-accordion">';
-                echo '  <h3>Current Basket</h3><div>';
-                //calling a function inside of the myFiunctions class 
-                 $obj->printBasket();
-            }
-                echo '</div>';
-            ?>
+        if(!empty($_SESSION['mainOrder']) || !empty($_SESSION['sideOrder'])){
+            echo '<div id="basket-accordion">';
+            echo '  <h3>Current Basket</h3><div>';
+            //calling a function inside of the myFiunctions class 
+            $obj->printBasket();
+        }
+            echo '</div>';
+        ?>
     <?php 
 } else{
     header('Location: ../pages/home.php');

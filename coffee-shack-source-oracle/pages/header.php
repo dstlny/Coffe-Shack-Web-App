@@ -88,11 +88,11 @@ Only here to stop a nasty bug with JQuery accordions ovelapping the header-->
           echo '<a href="../pages/menu.php">MENU</a>';
        } elseif(strpos($url, 'payment.php') !== false){
           echo '<a href="../pages/payment.php">ORDER PAYMENT</a>';
-       }  elseif(strpos($url, 'register-form.php') !== false){
+       } elseif(strpos($url, 'register-form.php') !== false){
           echo '<a href="../php/register-form.php">USER REGISTRATION</a>';
-       }  elseif(strpos($url, 'userAccount.php') !== false){
+       } elseif(strpos($url, 'userAccount.php') !== false){
           echo '<a href="../php/userAccount.php">ACCOUNT DETAILS</a>';
-       }  elseif(strpos($url, 'staffPage.php') !== false){
+       } elseif(strpos($url, 'staffPage.php') !== false){
           echo '<a href="../pages/staffPage.php">STAFF PAGE</a>';
        }
     ?>

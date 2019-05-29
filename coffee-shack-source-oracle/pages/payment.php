@@ -19,35 +19,35 @@ if(!empty($_SESSION['mainOrder']) || !empty($_SESSION['sideOrder'])){
     $obj->printFinal();
 
     if(!isset($_SESSION['ordered'])){
-	$userID = $_SESSION['userID'];
-	$total = $_SESSION['orderTotal'];
-	$_SESSION['tblNo'] = $_POST['tblNo'];
-	$current_timestamp = date('Y-m-d H:i:s'); 
-	    
-	//Insert order to the database.
-	$obj->step1($total,$current_timestamp,$_SESSION['tblNo']);
-	
-	//Get the next OrderID.
-	$answer = $obj->returnNextID();
-	    
-	//Loop through the order-items of the mainOrder session array
-	//Inserting them into order-items table.
-	for($i = 0; $i < count($_SESSION['mainOrder']); $i++){
-	    foreach($_SESSION['mainOrder'][$i] as $key=>$value){
-	            $obj->step2($value,$key);
-	    }
-	}
+		$userID = $_SESSION['userID'];
+		$total = $_SESSION['orderTotal'];
+		$_SESSION['tblNo'] = $_POST['tblNo'];
+		$current_timestamp = date('Y-m-d H:i:s'); 
+			
+		//Insert order to the database.
+		$obj->step1($total,$current_timestamp,$_SESSION['tblNo']);
+		
+		//Get the next OrderID.
+		$answer = $obj->returnNextID();
+			
+		//Loop through the order-items of the mainOrder session array
+		//Inserting them into order-items table.
+		for($i = 0; $i < count($_SESSION['mainOrder']); $i++){
+			foreach($_SESSION['mainOrder'][$i] as $key=>$value){
+					$obj->step2($value,$key);
+			}
+		}
 
-	//Loop through the order-items of the sideOrder session array
-	//Inserting them into order-items table.
-	for($i = 0; $i < count($_SESSION['sideOrder']); $i++){
-	    foreach($_SESSION['sideOrder'][$i] as $key=>$value){
-	            $obj->step2($value,$key);
-	    }
-	}
+		//Loop through the order-items of the sideOrder session array
+		//Inserting them into order-items table.
+		for($i = 0; $i < count($_SESSION['sideOrder']); $i++){
+			foreach($_SESSION['sideOrder'][$i] as $key=>$value){
+					$obj->step2($value,$key);
+			}
+		}
 
-	//here to make sure the order doesn't go through more than once.
-	$_SESSION['ordered'] = '1';
+		//here to make sure the order doesn't go through more than once.
+		$_SESSION['ordered'] = '1';
     }
 
     if($obj->getOrderStatus($_SESSION['orderID']) == 'N' || $obj->getOrderStatus($_SESSION['orderID']) == NULL){
@@ -56,7 +56,7 @@ if(!empty($_SESSION['mainOrder']) || !empty($_SESSION['sideOrder'])){
        echo '<meta http-equiv="Refresh" content="30">';
     } else{
        echo "<div><center><b><p style=\"font-size: 15px; color: green;\">Your order is completed! Please collect your order from the till, citing your Order Number (<b>{$_SESSION['orderID']}</b>)!</p></b><br><p style=\"font-size:12px;\" class=\"loading\">Redirecting back to menu, thanks for your order!<span>.</span><span>.</span><span>.</span></p></center></div></div></div>";
-       //tell the customer their order is complete, redirect back to menU and clear their current order by appending ?ClearOrder to the URL.
+       //tell the customer their order is complete, redirect back to menu and clear their current order by appending ?ClearOrder to the URL.
        echo "<meta http-equiv='Refresh' content='4; URL=../pages/menu.php?ClearAll'>";
     }
 

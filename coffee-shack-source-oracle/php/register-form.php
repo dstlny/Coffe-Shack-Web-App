@@ -86,6 +86,7 @@
                         */
                         if(isset($_SESSION['errors']['registration'])){
                            echo '<br>'.$_SESSION['errors']['registration'];
+                           echo "<meta http-equiv='Refresh' content='2; URL=../pages/home.php'>";
                         } elseif(isset($_SESSION['errors']['Allempty'])){
                            echo $_SESSION['errors']['Allempty'];   
                         }
