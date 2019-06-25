@@ -2,7 +2,8 @@
 include '../pages/header.php';
 //If this isn't set we know the user isn't signed in, thus we can gracefully redirect them to the home page.
 //Else, user is gained access to the page.
-if(isset($_SESSION['loggedIn']) || isset($_SESSION['adminLoggedIn'])){
+$user_object = unserialize($_SESSION['user']);
+if($user_object->_logged_in == TRUE){
    
     //If this session array isn't set then set it.    
     if(!isset($_SESSION['mainOrder'])){    

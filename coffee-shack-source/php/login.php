@@ -98,10 +98,6 @@ if (isset($_POST['subLogin'])) {
                     $user->setAdmin(FALSE);
                     
                     $_SESSION['errors']['success'] = "<br><b style=\"color: green; font-size: 12px;\">Succesfully logged in!</b>";
-                    $_SESSION['loggedIn'] = TRUE;
-                    $_SESSION['userName'] = $row['EmailAddress'];
-                    $_SESSION['userID'] = $row['User_ID'];
-
                     $_SESSION['user'] = serialize($user->getUserObject());
                     header("location: ../pages/home.php");
                     exit();
@@ -126,11 +122,7 @@ if (isset($_POST['subLogin'])) {
                             $user->setAdmin(TRUE);
 
                             $_SESSION['errors']['success'] = "<br><b style=\"color: green; font-size: 12px;\">Succesfully logged in!</b>";
-                            $_SESSION['adminLoggedIn'] = TRUE;
-                            $_SESSION['adminUserName'] = $row['Email_Address'];
-                            $_SESSION['adminID'] = $row['Staff_ID'];
                             $_SESSION['user'] = serialize($user->getUserObject());
-
 
                             header("location: ../pages/home.php");
                             exit();
