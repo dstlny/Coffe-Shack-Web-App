@@ -14,9 +14,9 @@ $obj = new myFunctions();
 
 <!--Style sheets ans well as scripts for the JQuery Accordions, for them to work-->
 <link rel="stylesheet" type="text/css" href="../css/style.css">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
 
 <!--Simple JQuery accordion script.-->
 <script>
@@ -80,18 +80,18 @@ Only here to stop a nasty bug with JQuery accordions ovelapping the header-->
        $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
        $url = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
       
-       if(strpos($url, 'home.php') !== false && isset($_SESSION['adminLoggedIn'])){
-          echo '<a href="../pages/home.php">STAFF PAGE</a>';
-       } elseif(strpos($url, 'home.php') !== false){
+       if(strpos($url, 'home.php') !== false){
           echo '<a href="../pages/home.php">HOMEPAGE</a>';
        } elseif(strpos($url, 'menu.php') !== false){
           echo '<a href="../pages/menu.php">MENU</a>';
        } elseif(strpos($url, 'payment.php') !== false){
           echo '<a href="../pages/payment.php">ORDER PAYMENT</a>';
-       }  elseif(strpos($url, 'register-form.php') !== false){
+       } elseif(strpos($url, 'register-form.php') !== false){
           echo '<a href="../php/register-form.php">USER REGISTRATION</a>';
-       }  elseif(strpos($url, 'userAccount.php') !== false){
+       } elseif(strpos($url, 'userAccount.php') !== false){
           echo '<a href="../php/userAccount.php">ACCOUNT DETAILS</a>';
+       } elseif(strpos($url, 'staffPage.php') !== false){
+          echo '<a href="../pages/staffPage.php">STAFF PAGE</a>';
        }
     ?>
 </nav>

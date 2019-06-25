@@ -27,13 +27,13 @@
                 <button type="submit" name="subLogin" value="submit" class="registration-input">Login</button>
                     <?php
                         if(isset($_SESSION['errors']['loginEmpty'])){
-                            echo '<br>'.$_SESSION['errors']['loginEmpty'];
+                            echo "<br>{$_SESSION['errors']['loginEmpty']}";
                             unset($_SESSION['errors']['loginEmpty']);
                         } elseif(isset($_SESSION['errors']['sqlError'])){
-                            echo '<br>'.$_SESSION['errors']['sqlError'];
+                            echo "<br>{$_SESSION['errors']['sqlError']}";
                             unset($_SESSION['errors']['sqlError']);
                         } elseif(isset($_SESSION['errors']['noRecog'])){
-                            echo '<br>'.$_SESSION['errors']['noRecog'];
+                            echo "<br>{$_SESSION['errors']['noRecog']}";
                             unset($_SESSION['errors']['noRecog']);
                         } elseif(isset($_SESSION['errors']['success'])){
                             echo $_SESSION['errors']['success'];

@@ -18,11 +18,11 @@
                         * Simply checking if they are set or not, if they aren't nothing is ever outputted.
                         */
                         if(isset($_SESSION['errors']['email'])){
-                            echo '<br>'.$_SESSION['errors']['email'];
+                            echo "<br>{$_SESSION['errors']['email']}";
                             unset($_SESSION['errors']['email']);
                         } elseif(isset($_SESSION['errors']['sqlError'])){
-                             echo '<br>'.$_SESSION['errors']['sqlError'];
-                              unset($_SESSION['errors']['sqlError']);
+                            echo "<br>{$_SESSION['errors']['sqlError']}";
+                            unset($_SESSION['errors']['sqlError']);
                         }
                       ?><br>
                     <input type="text" placeholder="First name" name="txtUserFirst" class="registration-input"><?php
@@ -34,11 +34,11 @@
                         * Simply checking if they are set or not, if they aren't nothing is ever outputted.
                         */
                         if(isset($_SESSION['errors']['firname'])){
-                            echo '<br>'.$_SESSION['errors']['firname'];
+                            echo "<br>{$_SESSION['errors']['firname']}";
                             unset($_SESSION['errors']['firname']);
                         } elseif(isset($_SESSION['errors']['sqlError'])){
-                            echo '<br>'.$_SESSION['errors']['sqlError'];
-                             unset($_SESSION['errors']['sqlError']);
+                            echo "<br>{$_SESSION['errors']['sqlError']}";
+                            unset($_SESSION['errors']['sqlError']);
                         }
                     ?><br>
                     <input type="text" placeholder="Second name" name="txtUserLast" class="registration-input">
@@ -51,13 +51,13 @@
                         * Simply checking if they are set or not, if they aren't nothing is ever outputted.
                         */
                         if(isset($_SESSION['errors']['secname'])){
-                            echo '<br>'.$_SESSION['errors']['secname'];
+                            echo "<br>{$_SESSION['errors']['secname']}";
                             unset($_SESSION['errors']['secname']);
                         } elseif(isset($_SESSION['errors']['sqlError'])){
-                             echo '<br>'.$_SESSION['errors']['sqlError'];
+                            echo "<br>{$_SESSION['errors']['sqlError']}";
                              unset($_SESSION['errors']['firname']);
                         } elseif(isset($_SESSION['errors']['firsecname'])){
-                            echo '<br>'.$_SESSION['errors']['firsecname'];
+                            echo "<br>{$_SESSION['errors']['firsecname']}";
                             unset($_SESSION['errors']['firsecname']);
                         }
                     ?><br>
@@ -70,7 +70,7 @@
                         * Simply checking if they are set or not, if they aren't nothing is ever outputted.
                         */
                         if(isset($_SESSION['errors']['pass'])){
-                            echo '<br>'.$_SESSION['errors']['pass'];
+                            echo "<br>{$_SESSION['errors']['pass']}";
                             unset($_SESSION['errors']['pass']);
                         }
                     ?><br>
@@ -83,7 +83,7 @@
                         * Simply checking if they are set or not, if they aren't nothing is ever outputted.
                         */
                         if(isset($_SESSION['errors']['passRe'])){
-                            echo '<br>'.$_SESSION['errors']['passRe'];
+                            echo "<br>{$_SESSION['errors']['passRe']}";
                             unset($_SESSION['errors']['passRe']);
                         }
                     ?><br>
@@ -94,7 +94,7 @@
                         * Simply checking if they are set or not, if they aren't nothing is ever outputted.
                         */
                         if(isset($_SESSION['errors']['registration'])){
-                           echo '<br>'.$_SESSION['errors']['registration'];
+                           echo "<br>{$_SESSION['errors']['registration']}";
                            echo '<p style="font-size:12px;" class="loading">Redirecting to login<span>.</span><span>.</span><span>.</span></p>';
                             
                             if(isset($_SESSION['errors']['success'])){

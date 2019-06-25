@@ -2,56 +2,58 @@
 include '../pages/header.php';
 //If this isn't set we know the user isn't signed in, thus we can gracefully redirect them to the home page.
 //Else, user is gained access to the page.
-if(isset($_SESSION['loggedIn'])){
+if(isset($_SESSION['loggedIn']) || isset($_SESSION['adminLoggedIn'])){
    
     //If this session array isn't set then set it.    
     if(!isset($_SESSION['mainOrder'])){    
        $_SESSION['mainOrder'] = array();
+    } elseif(!isset($_SESSION['sideOrder'])){    
+       $_SESSION['sideOrder'] = array();
     }
         
      //if this two GET variables are set, add them onto the session array
-    if(isset($_GET['id']) && isset($_GET['qty'])){
-       //array_push($_SESSION['mainOrder'], array($_GET['id'] => $_GET['qty'])); -- this is slower as it involves calling the array_push function each time.
-       $_SESSION['mainOrder'][] = array($_GET['id'] => $_GET['qty']); //-- faster - since we haven't got the overhead of calling a function, we're just appending the ID/QTY to the end.
-       header('Location: ../pages/menu.php');
+    if(isset($_GET['id']) || isset($_GET['bkID'])){
+      
+        if(isset($_GET['qty'])){
+           //array_push($_SESSION['mainOrder'], array($_GET['id'] => $_GET['qty'])); -- this is slower as it involvescalling the array_push function each time.
+           $_SESSION['mainOrder'][] = array($_GET['id'] => $_GET['qty']); 
+           //-- faster - since we haven't got the overhead of calling a function, we're just appending the ID/QTY to the end.
+        } elseif(isset($_GET['bkQty'])){
+           //array_push($_SESSION['mainOrder'], array($_GET['id'] => $_GET['qty'])); -- this is slower as it involvescalling the array_push function each time.
+           $_SESSION['sideOrder'][] = array($_GET['bkID'] => $_GET['bkQty']);
+           //-- faster - since we haven't got the overhead of calling a function, we're just appending the ID/QTY to the end.
+        }
+
+        header('Location: ../pages/menu.php');
     } 
             
     //Restricting the amount of cofee orders the user can submit to 4 
     //Relay a simple message stating this.
-    if(count($_SESSION['mainOrder']) > 4){
-       echo '<script>alert("You cannot add more than 3 items at a time!");</script>';
+    if(isset($_SESSION['mainOrder']) && count($_SESSION['mainOrder']) > 4){
+       echo '<script>alert("You cannot add more than 4 items at a time from the coffee section!");</script>';
        $index = array_search($_GET['id'], $_SESSION['mainOrder']);
        array_splice($_SESSION['mainOrder'], $index, 1);
        header('Location: ../pages/menu.php');
     }
-        
-     //If this session array isn't set then set it.  
-    if(!isset($_SESSION['sideOrder'])){    
-       $_SESSION['sideOrder'] = array();
-       header('Location: ../pages/menu.php');
-    }
-        
-    //if this two GET variables are set, add them onto the session array
-    if(isset($_GET['bkID']) && isset($_GET['bkQty'])){
-        //array_push($_SESSION['sideOrder'], array($_GET['bkID'] => $_GET['bkQty'])); -- this is slower as it involves calling the array_push function each time.
-        $_SESSION['sideOrder'][] = array($_GET['bkID'] => $_GET['bkQty']); // faster - since we haven't got the overhead of calling a function, we're just appending the bkID/bkQty to the end.
-        header('Location: ../pages/menu.php');
-    }
-        
+
     //Restricting the amount of orders from the bakery the user can submit to 4.
     //Relay a simple message stating this.
-    if(count($_SESSION['sideOrder']) > 4){
-       echo '<script>alert("You cannot add more than 3 items at a time!");</script>';
+    if(isset($_SESSION['sideOrder']) && count($_SESSION['sideOrder']) > 4){
+       echo '<script>alert("You cannot add more than 4 items at a time from the bakery section!");</script>';
        $index = array_search($_GET['bkID'], $_SESSION['sideOrder']);
        array_splice($_SESSION['sideOrder'], $index, 1);
        header('Location: ../pages/menu.php');
     }
     
-    //Clears all favourites, redirects to Index page.
+    //Clears necccessary session variables
     if(isset($_GET['ClearAll'])){
        $_SESSION['mainOrder'] = array();
        $_SESSION['sideOrder'] = array();
-       echo '<meta http-equiv="refresh" content="0;url=../pages/menu.php">';
+       unset($_SESSION['ordered']);
+       unset($_SESSION['orderID']);
+       unset($_SESSION['orderTotal']);
+       unset($_SESSION['mainOrder']);
+       unset($_SESSION['sideOrder']);
     }
     ?>
     <!--JQuery accordion-->
@@ -119,11 +121,10 @@ if(isset($_SESSION['loggedIn'])){
         </div>
     </div>
     <?php              
-            if(!empty($_SESSION['mainOrder']) || !empty($_SESSION['siderOrder'])){
+            if(!empty($_SESSION['mainOrder']) || !empty($_SESSION['sideOrder'])){
                 echo '<div id="basket-accordion">';
                 echo '  <h3>Current Basket</h3><div>';
-                //calling a function inside of the myFiunctions class 
-                        $obj->printBasket();
+                $obj->printBasket();
             }
                 echo '</div>';
             ?>
