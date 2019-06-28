@@ -1,5 +1,5 @@
-Initial commit: 21/11/2018 by Luke Elam (@dstlny)
-Latest commit: 28/06/2019 by Luke Elam (@dstlny)
+# Initial commit: 21/11/2018 by Luke Elam (@dstlny)
+# Latest commit: 28/06/2019 by Luke Elam (@dstlny)
 
 # Project-Management-Web-Application
 - Login System (using parameterised queries/prepared statements, hashed passwords, etc.)
