@@ -1,6 +1,12 @@
 <?php
+/*
+Include our connection to the database.
+*/
 include '../dbcon/init.php';
 
+/*
+This class represents the user
+*/
 class user {
     private $_mailuid;
     private $_pass; 
@@ -57,6 +63,9 @@ class user {
         return $this->_logged_in;
     }
 
+    /*
+      Returns an object which represents the user and their data.
+    */
     function getUserObject(){
         return (object)['_mailuid' => $this->_mailuid,'_logged_in' => $this->_logged_in,'_userID' => $this->_userID,'_admin' => $this->_admin];
     }
@@ -70,15 +79,18 @@ if (isset($_POST['subLogin'])) {
     $_SESSION['errors'] = array();
     $hash = hash('sha512',$user->getPass()).hash('sha384',$user->getPass()).hash('whirlpool',$user->getPass());
 
+    //Check if email/pass are empty.
     if(empty($user->getEmail()) && empty($user->getPass())){
         $_SESSION['errors']['loginEmpty'] = "<br><b style=\"color: red; font-size: 12px;\">Login fields cannot be empty!</b>";
         header("location: ../pages/home.php");
         exit();
     } else {
+        //Check if email is empty.
         if(empty($user->getEmail())){
             $_SESSION['errors']['email'] = "<b style=\"color: red; font-size: 12px;\">Please enter a email address!</b>";
             header("location: ../pages/home.php");
             exit();
+         //Check if password is empty.
         } elseif(empty($user->getPass())){
             $_SESSION['errors']['pass'] = "<b style=\"color: red; font-size: 12px;\">Please enter a password!</b>";
             header("location: ../pages/home.php");
@@ -86,6 +98,11 @@ if (isset($_POST['subLogin'])) {
         } else {
          $query  = 'SELECT EmailAddress, User_ID, Password FROM CUSTOMER WHERE EmailAddress = ?';
          $stmt = mysqli_stmt_init($connection);
+            
+         /*
+           Since email nor password are empty, we can assume all details are present, 
+           thus query the database and see if we got a hit.
+         */
          if(mysqli_stmt_prepare($stmt, $query)){
              mysqli_stmt_bind_param($stmt,'s',$user->getEmail());
              mysqli_stmt_execute($stmt);
@@ -107,7 +124,10 @@ if (isset($_POST['subLogin'])) {
                      exit();
                  }
              } else{
-                //check staff/admin exists
+                /*
+                   This means the details the user fed us aren't in the CUSTOMER database, 
+                   thus check the staff database next to see if we get a hit.
+                */
                 $query  = "SELECT Email_Address, Staff_ID, Password FROM STAFF WHERE Email_Address = ?";
                 $stmt = mysqli_stmt_init($connection);
                 if(mysqli_stmt_prepare($stmt, $query)){
