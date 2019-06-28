@@ -1,6 +1,9 @@
 <?php
 class myFunctions {
-
+    
+    /*
+      Retrieves the next available Order ID
+    */
     public function returnNextID(){
         include '../dbcon/init.php';
         $query = "SELECT AUTO_INCREMENT 
@@ -12,6 +15,9 @@ class myFunctions {
         return $row['AUTO_INCREMENT'];
     }
  
+    /*
+      Retrieves the order status of a given order.
+    */
     public function getOrderStatus($id){
        include '../dbcon/init.php';
        $query = "SELECT ORDER_COMPLETE FROM ORDERS WHERE ORDER_ID = $id";
@@ -19,19 +25,28 @@ class myFunctions {
        $row = mysqli_fetch_assoc($result);
        return $row['ORDER_COMPLETE'];
    }
- 
+    
+    /*
+      Inserts a given order into the database. 
+    */
     public function insertOrders($total,$table,$current_timestamp,$userID){
         include '../dbcon/init.php';
         $query = "INSERT INTO ORDERS (Order_ID, Order_Total, Table_No, Order_Timestamp, Order_Complete, fk1_User_ID, fk2_Staff_ID) VALUES ('',$total,$table,'$current_timestamp', 'N', $userID, NULL)";
         mysqli_query($connection, $query);
     }
     
+    /*
+      Inserts a given orders items into the database.
+    */
     public function insertOrderItems($qty,$prod_id,$order_id){
         include '../dbcon/init.php';
         $query = "INSERT INTO ORDER_ITEMS (Order_Items_ID, Quantity, fk1_Product_ID, fk2_Order_ID) VALUES ('',$qty,$prod_id, $order_id)";
         mysqli_query($connection, $query);
     }
     
+    /*
+      Prints the order, and their associated order-items.
+    */
     public function printItems($category){
         include '../dbcon/init.php';
         $query  = "SELECT * FROM PRODUCT WHERE Product_Cat = '$category';";
@@ -74,6 +89,9 @@ class myFunctions {
         echo "     <!-- TABLE HTML CODE END -->\n\n";
     }
     
+    /*
+      Retrieves the users details.
+    */
     public function getUserDetails($email, $admin){
         include '../dbcon/init.php';
 
@@ -93,6 +111,9 @@ class myFunctions {
         }
     }
     
+    /*
+      Prints the users basket.
+    */
     public function printBasket(){
         include '../dbcon/init.php';
 
@@ -135,6 +156,9 @@ class myFunctions {
         echo '<br><center><a style="color: black;" href="?ClearAll">Remove all</a></center><p style="font-size: 15px; border-right: 1px solid black; border-left: 1px solid black;"><b>Total: £'.number_format($total, 2).'</b></p><button type="submit" class="buttonAsLink">Pay Now!</button><br><br></div></div>';
     }
     
+    /*
+      Prints the users FINAL, confirmed basket.
+    */
     public function printFinal(){
         include '../dbcon/init.php';
         
@@ -168,7 +192,10 @@ class myFunctions {
         echo '<p style="font-size: 15px;"><b>Total: £'.number_format($total, 2).'</b></p>';
         echo '</div></div>';
     }
-
+    
+    /*
+      Checks to see if orders are available to the staff members.
+    */
     public function checkOrders(){
         include '../dbcon/init.php';
         $query = "SELECT * FROM ORDERS WHERE Order_Complete='N';";
@@ -177,6 +204,9 @@ class myFunctions {
         return $rowcount == 0 ? FALSE : TRUE;
     }
     
+    /*
+      Checks to see if orders are available to the staff members.
+    */
     public function printCustomerOrders(){
         include '../dbcon/init.php';
         $query = "SELECT Order_ID, Order_Total FROM ORDERS WHERE Order_Complete='N';";
@@ -199,6 +229,9 @@ class myFunctions {
             echo '</div>';
     }
     
+    /*
+      Retrieves the items from an order and prints them in a pretty table.
+    */
     public function getOrderItemsFromOrderID($id){
         include '../dbcon/init.php';
         $query = "SELECT fk1_Product_ID, Quantity FROM ORDER_ITEMS WHERE fk2_Order_ID = $id;";
@@ -209,6 +242,9 @@ class myFunctions {
 
     }
     
+    /*
+      Returns the products name from a given product id within an orders items.
+    */
     public function getProductFromForeignKey($id){
         include '../dbcon/init.php';
         $query = "SELECT Product_Name FROM PRODUCT WHERE Product_ID = $id;";
