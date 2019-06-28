@@ -17,8 +17,7 @@
 - Order-completion notification for the user
 - Registration System.
 - Shopping-cart System.
-- Users can only access this basket/cart system if they have saved ONE or MORE products, otherwise they'll be redirected to Index.
-- Easily maintainable.
+  - Users can only access this basket/cart system if they have saved ONE or MORE products, otherwise they'll be redirected to Index.
 - Admin/Staff system
 - Languages used: PHP (OOP and Procedural), CSS, JS, JQuery, HTML, SQL.
 
