@@ -9,6 +9,9 @@
     $user_object->_userName; //this contains the users username.
     $user_object->_userID; //this contains the users User ID from the database.
     $user_object->_admin; //this contains whether or not a users it an Admin, or not.
+    /*
+      DISCLAIMER: These variables are set when the user logs in to the website, and cannot be changed.
+    */
     ```
 - Customer table selection
 - Order-completion notification for the user
