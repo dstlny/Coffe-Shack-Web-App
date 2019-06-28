@@ -1,5 +1,6 @@
 # Project-Management-Web-Application
 - Login System (using parameterised queries/prepared statements, hashed passwords, etc.)
+  - Users are Objects, with various data.
 - Customer table selection
 - Order-completion notification for the user
 - Registration System.
@@ -20,7 +21,7 @@
   - `insertOrderItems($qty,$prod_id,$order_id)` - pass through the required arguments, inserts that data into the database.
   - `printItems($category)` - pass through a product category and it return everything in that given category.
   - `getUserDetails($email, $admin)` - `$email` is the users email, `$admin` is `TRUE` or `FALSE`. Retrieves that users details.
-  - `printBasket()` - Prints the users current basket., which is stored respectively in two `$_SESSION[] ` arrays (`$_SESSION['mainOrder']` and `$_SESSION['sideOrder']`)
+  - `printBasket()` - Prints the users current basket., which is stored respectively in two `$_SESSION[]` arrays (`$_SESSION['mainOrder']` and `$_SESSION['sideOrder']`)
   - `printFinal()` - Same as above, but used for Payment page.
   - `checkOrders()` - checks if any orders are available for staff members to process. Returns `TRUE` if there is, `FALSE` if there isn't. If `TRUE`, triggers the next function.
   - `printCustomerOrders()` - prints any and all orders which are available and haven't been processed already. Queries `ORDERS` table.
