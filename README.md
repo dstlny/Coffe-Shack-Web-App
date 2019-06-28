@@ -1,6 +1,3 @@
-# Initial commit: 21/11/2018 by Luke Elam (@dstlny)
-# Latest commit: 28/06/2019 by Luke Elam (@dstlny)
-
 # Project-Management-Web-Application
 - Login System (using parameterised queries/prepared statements, hashed passwords, etc.)
 - Customer table selection
@@ -34,3 +31,6 @@
 
 ## Disclaimer 
 This website template is not endorsed by, directly affiliated with, maintained, authorized, or sponsored by any of the products that i have used as placeholders for this website template. All product and company names are the registered trademarks of their original owners. The use of any trade name or trademark is for identification and reference purposes only and does not imply any association with the trademark holder of their product brand. 
+
+### Initial commit: 21/11/2018 by Luke Elam (@dstlny)
+### Latest commit: 28/06/2019 by Luke Elam (@dstlny)
