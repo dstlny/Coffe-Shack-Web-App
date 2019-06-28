@@ -21,11 +21,8 @@
 - Admin/Staff system
 - Languages used: PHP (OOP and Procedural), CSS, JS, JQuery, HTML, SQL.
 
-## **Oracle source code has been implemented.**
-- You can find this in the `coffee-shack-source-oracle` folder.
-- The Oracle and MySQL implementation are identical, as of a Jun 26th.
 
-## Functions included within `myFunctions.php`, for general use.
+## Function definitions.
   - `returnNextID()` - returns largest OrderID incremented by 1.
   - `getOrderStatus($id)` - pass-through Order ID (`$id`), returns `Y` if an order is marked as complete and `N` if not.
   - `insertOrders($total,$table,$current_timestamp,$userID)` - pass through the required arguments, inserts that data into the database.
@@ -40,6 +37,9 @@
   - `getProductFromForeignKey($id)` - pass through `$id` of item in users basket, details of that item are then returned. Queries `PRODUCT` table.
   - `returnCurrID()` - returns the largest OrderID (current).
   - `checkOrders()` - returns `true` if incomplete orders exist, `false` if not
+
+## **Oracle source code has been implemented.**
+- You can find this in the `coffee-shack-source-oracle` folder, however i no longer have access to an installation of Oracle Apex - as this was hosted locally at my University, thus i am not able to work on that specific code-base without being able to debug/work on the database.
 
 ## Disclaimer 
 This website template is not endorsed by, directly affiliated with, maintained, authorized, or sponsored by any of the products that i have used as placeholders for this website template. All product and company names are the registered trademarks of their original owners. The use of any trade name or trademark is for identification and reference purposes only and does not imply any association with the trademark holder of their product brand.
