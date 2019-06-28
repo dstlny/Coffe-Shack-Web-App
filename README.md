@@ -1,6 +1,15 @@
 # Project-Management-Web-Application
 - Login System (using parameterised queries/prepared statements, hashed passwords, etc.)
-  - Users are Objects, with various data.
+  - Users are Objects - to access the users data, you can use the following syntax:
+    ```php
+    $user_object = unserialize($_SESSION['user']);
+
+    $user_object->_mailuid; //this contains the users Email Address.
+    $user_object->_logged_in; //this contains whether or not the users is logged in (TRUE/FALSE).
+    $user_object->_userName; //this contains the users username.
+    $user_object->_userID; //this contains the users User ID from the database.
+    $user_object->_admin; //this contains whether or not a users it an Admin, or not.
+    ```
 - Customer table selection
 - Order-completion notification for the user
 - Registration System.
