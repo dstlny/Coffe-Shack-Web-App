@@ -6,7 +6,7 @@
             <form method="post" action="../pages/home.php">
                 <p style="padding-right: 10px;font-size: 12px; float: left;">Already have an account?<br> If so, login</p><button style="width: 80px; font-size:12px; padding:4px; margin-top:15px; height: 30px;" type="submit" name="login" class="register">Login</button>
             </form>
-            <form method="post" action="../php/register.php">
+            <form method="post" action="../php/register.php" autocomplete="off">
                 <fieldset>
                     <legend>Account Registration</legend>
                     <input type="text" placeholder="Email" name="txtEmail" class="registration-input"><?php
@@ -56,9 +56,6 @@
                         } elseif(isset($_SESSION['errors']['sqlError'])){
                             echo "<br>{$_SESSION['errors']['sqlError']}";
                              unset($_SESSION['errors']['firname']);
-                        } elseif(isset($_SESSION['errors']['firsecname'])){
-                            echo "<br>{$_SESSION['errors']['firsecname']}";
-                            unset($_SESSION['errors']['firsecname']);
                         }
                     ?><br>
                     <input type="password" placeholder="Password" name="txtPass" class="registration-input"><?php

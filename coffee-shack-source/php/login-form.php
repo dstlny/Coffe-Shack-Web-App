@@ -3,7 +3,7 @@
         <form method="post" action="../php/register-form.php">
             <p style="padding-right: 10px;font-size: 12px; float: left;">Don't have an account?<br>Don't worry, sign up!</p><button style="width: 80px; font-size:12px; padding:4px; margin-top:15px; height: 30px;" type="submit" name="register" class="register">Register</button>
         </form>
-        <form method="post" action="../php/login.php">
+        <form method="post" action="../php/login.php" autocomplete="off">
             <fieldset>
                 <legend>Login</legend>
                 <input type="text" placeholder="Email" name="txtLogEmail" class="registration-input"><?php

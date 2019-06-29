@@ -109,6 +109,7 @@ class myFunctions {
             value=\"{$row['EmailAddress']}\" readonly><br><hr><label for=name\">Fullname</label><input type=\"text\" name=\"name\" value=\"{$row['User_Forname']} {$row['User_Surname']}\" readonly></fieldset></form>";
             echo  '<center><p style="font-size:13px;">Want to logout? <a href="../php/logout.php" style="font-size:13px;">Logout</a></p></center></div>';
         }
+        
     }
     
     /*
