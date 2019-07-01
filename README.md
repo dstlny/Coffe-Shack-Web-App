@@ -24,7 +24,6 @@
 - If the user has ordered, they can go back to their order through the bottom nav-bar.
 - Languages used: PHP (OOP and Procedural), CSS, JS, JQuery, HTML, SQL.
 
-
 ## Function definitions.
   - `returnNextID()` - returns largest OrderID incremented by 1.
   - `getOrderStatus($id)` - pass-through Order ID (`$id`), returns `Y` if an order is marked as complete and `N` if not.
@@ -40,6 +39,17 @@
   - `getProductFromForeignKey($id)` - pass through `$id` of item in users basket, details of that item are then returned. Queries `PRODUCT` table.
   - `returnCurrID()` - returns the largest OrderID (current).
   - `checkOrders()` - returns `true` if incomplete orders exist, `false` if not
+  
+## Feature Screenshots.
+![Login Page](/images/image01.png)
+![Menu Page](/images/image02.png)
+![Account Page](/images/image03.png)
+![Basket Section](/images/image04.png)
+![Payment Section](/images/image05.png)
+![Staff Page](/images/image06.png)
+![Order completion message](/images/image07.png)
+![Current basket message](/images/image08.png)
+
 
 ## **Oracle source code has been implemented.**
 - You can find this in the `coffee-shack-source-oracle` folder, however i no longer have access to an installation of Oracle Apex - as this was hosted locally at my University, thus i am not able to work on that specific code-base without being able to debug/work on the database.
