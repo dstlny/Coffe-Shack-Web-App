@@ -1,6 +1,6 @@
 # Project-Management-Web-Application
 - Login System (using parameterised queries/prepared statements, hashed passwords, etc.)
-  - Users are Objects - to access the users data, you can use the following syntax:
+  - Users are Objects - to access the users [stored] data, you can use the following syntax:
     ```php
     $user_object = unserialize($_SESSION['user']);
 
