@@ -127,7 +127,10 @@ class myFunctions {
             $query  = "SELECT Email_Address FROM STAFF WHERE Email_Address = '$email';";
             $result = $sqli->query($query);
             $row = $result->fetch_assoc();
-            echo "<div class=\"userDetails\"><form><fieldset><legend>Stored details</legend><label for=\"Email\">Staff Email</label><input type=\"text\" name=\"Email\" value=\"{$row['Email_Address']}\" readonly></form></div><center><p style=\"font-size:13px;\">Want to logout? <a href=\"../php/logout.php\" style=\"font-size:13px;\">Logout</a></p></center>";
+            echo "<div class=\"userDetails\"><form><fieldset><legend>Stored details</legend><label for=\"Email\">Staff Email</label><input type=\"text\" name=\"Email\" value=\"{$row['Email_Address']}\" readonly><center><p style=\"font-size:13px;\">Want to logout? <a href=\"../php/logout.php\" style=\"font-size:13px;\">Logout</a></p></center></form></div>";
+            echo "<div class=\"userDetails\"><form action=\"\" method=\"post\"><fieldset><legend>Update password</legend><br><label for=\"Current\">Current Password</label><input type=\"password\" name=\"Current\" value=\"\" required>
+            <br><br><label for=\"New_Pass\">New Password</label><br><input type=\"text\" name=\"New_Pass\" value=\"\" required><br><br>
+            <label for=\"New_Confirm_Password\">Confirm your new password</label><input type=\"text\" name=\"New_Confirm_Password\" value=\"\" required><br><br><input name=\"sub_pass\" type=\"submit\" value=\"Update passsword\"><br><br></form>";
             $result->close();
         } else{
             $query  = "SELECT EmailAddress, User_Forname, User_Surname FROM CUSTOMER WHERE EmailAddress = '$email';";
@@ -135,6 +138,9 @@ class myFunctions {
             $row = $result->fetch_assoc();
             echo "<div class=\"userDetails\"><form><fieldset><legend>Stored details</legend><label for=\"Email\">Email</label><input type=\"text\" name=\"Email\" 
             value=\"{$row['EmailAddress']}\" readonly><br><hr><label for=name\">Fullname</label><input type=\"text\" name=\"name\" value=\"{$row['User_Forname']} {$row['User_Surname']}\" readonly></fieldset></form><center><p style=\"font-size:13px;\">Want to logout? <a href=\"../php/logout.php\" style=\"font-size:13px;\">Logout</a></p></center></div>";
+            echo "<div class=\"userDetails\"><form action=\"\" method=\"post\"><fieldset><legend>Update password</legend><br><label for=\"Current\">Current Password</label><input type=\"password\" name=\"Current\" value=\"\" required>
+            <br><br><label for=\"New_Pass\">New Password</label><br><input type=\"text\" name=\"New_Pass\" value=\"\" required><br><br>
+            <label for=\"New_Confirm_Password\">Confirm your new password</label><input type=\"text\" name=\"New_Confirm_Password\" value=\"\" required><br><br><input name=\"sub_pass\" type=\"submit\" value=\"Update passsword\"><br><br></form>";
             $result->close();
         }
         $sqli->close();
