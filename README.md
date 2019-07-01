@@ -1,6 +1,6 @@
 # Project-Management-Web-Application
 - Login System (using parameterised queries/prepared statements, hashed passwords, etc.)
-  - Users are Objects - to access the users data, you can use the following syntax:
+  - Users are Objects - to access the users [stored] data, you can use the following syntax:
     ```php
     $user_object = unserialize($_SESSION['user']);
 
@@ -19,6 +19,9 @@
 - Shopping-cart System.
   - Users can only access this basket/cart system if they have saved ONE or MORE products, otherwise they'll be redirected to Index.
 - Admin/Staff system
+- Account page
+  - Users can change their passsword here and check the details the restraunt curently has stored about them.
+- If the user has ordered, they can go back to their order through the bottom nav-bar.
 - Languages used: PHP (OOP and Procedural), CSS, JS, JQuery, HTML, SQL.
 
 
@@ -45,4 +48,4 @@
 This website template is not endorsed by, directly affiliated with, maintained, authorized, or sponsored by any of the products that i have used as placeholders for this website template. All product and company names are the registered trademarks of their original owners. The use of any trade name or trademark is for identification and reference purposes only and does not imply any association with the trademark holder of their product brand.
 ##
 ### Initial commit: 21/11/2018 by Luke Elam (@dstlny)
-### Latest commit: 28/06/2019 by Luke Elam (@dstlny)
+### Latest commit: 01/07/2019 by Luke Elam (@dstlny)
