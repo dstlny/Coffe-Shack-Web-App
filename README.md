@@ -19,6 +19,9 @@
 - Shopping-cart System.
   - Users can only access this basket/cart system if they have saved ONE or MORE products, otherwise they'll be redirected to Index.
 - Admin/Staff system
+- Account page
+  - Users can change their passsword here and check the details the restraunt curently has stored about them.
+- If the user has ordered, they can go back their order through the bottom nav-bar.
 - Languages used: PHP (OOP and Procedural), CSS, JS, JQuery, HTML, SQL.
 
 
