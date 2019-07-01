@@ -41,14 +41,14 @@
   - `checkOrders()` - returns `true` if incomplete orders exist, `false` if not
   
 ## Feature Screenshots.
-![Login Page](images/image01.png)
-![Menu Page](images/image02.png)
-![Account Page](images/image03.png)
-![Basket Section](images/image04.png)
-![Payment Section](images/image05.png)
-![Staff Page](images/image06.png)
-![Order completion message](images/image07.png)
-![Current basket message](images/image08.png)
+![Login Page](https://raw.githubusercontent.com/dstlny/Project-Management-Web-App/master/images/image01.PNG)
+![Menu Page](https://raw.githubusercontent.com/dstlny/Project-Management-Web-App/master/images/image02.PNG)
+![Account Page](https://raw.githubusercontent.com/dstlny/Project-Management-Web-App/master/images/image03.PNG)
+![Basket Section](https://raw.githubusercontent.com/dstlny/Project-Management-Web-App/master/images/image04.PNG)
+![Payment Section](https://raw.githubusercontent.com/dstlny/Project-Management-Web-App/master/images/image05.PNG)
+![Staff Page](https://raw.githubusercontent.com/dstlny/Project-Management-Web-App/master/images/image06.PNG)
+![Order completion message](https://raw.githubusercontent.com/dstlny/Project-Management-Web-App/master/images/image07.PNG)
+![Current basket message](https://raw.githubusercontent.com/dstlny/Project-Management-Web-App/master/images/image08.PNG)
 
 
 ## **Oracle source code has been implemented.**
