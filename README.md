@@ -21,7 +21,7 @@
 - Admin/Staff system
 - Account page
   - Users can change their passsword here and check the details the restraunt curently has stored about them.
-- If the user has ordered, they can go back their order through the bottom nav-bar.
+- If the user has ordered, they can go back to their order through the bottom nav-bar.
 - Languages used: PHP (OOP and Procedural), CSS, JS, JQuery, HTML, SQL.
 
 
