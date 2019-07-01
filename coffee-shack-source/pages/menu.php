@@ -178,7 +178,7 @@ if($user_object->_logged_in){
             } );
             </script>
             <?=
-            "<div id=\"basket-accordion\"><h3>Current Basket</h3><div>You have already ordered!<br>To access your current order please click \"Current Order\" at the bottom. Or alternatively, click <a href='../php/payment.php'>this link</a></div></div>";
+            "<div id=\"basket-accordion\"><h3>Current Basket</h3><div>You have already ordered!<br>To access your current order please click \"Current Order\" at the bottom. Or alternatively, click <a href='../pages/payment.php'>this link</a></div></div>";
         }
             ?>   
     <?php 
