@@ -41,14 +41,14 @@
   - `checkOrders()` - returns `true` if incomplete orders exist, `false` if not
   
 ## Feature Screenshots.
-![Login Page](/images/image01.png)
-![Menu Page](/images/image02.png)
-![Account Page](/images/image03.png)
-![Basket Section](/images/image04.png)
-![Payment Section](/images/image05.png)
-![Staff Page](/images/image06.png)
-![Order completion message](/images/image07.png)
-![Current basket message](/images/image08.png)
+![Login Page](images/image01.png)
+![Menu Page](images/image02.png)
+![Account Page](images/image03.png)
+![Basket Section](images/image04.png)
+![Payment Section](images/image05.png)
+![Staff Page](images/image06.png)
+![Order completion message](images/image07.png)
+![Current basket message](images/image08.png)
 
 
 ## **Oracle source code has been implemented.**
