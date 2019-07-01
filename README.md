@@ -40,6 +40,15 @@
   - `returnCurrID()` - returns the largest OrderID (current).
   - `checkOrders()` - returns `true` if incomplete orders exist, `false` if not
   
+## **Oracle source code has been implemented.**
+- You can find this in the `coffee-shack-source-oracle` folder, however i no longer have access to an installation of Oracle Apex - as this was hosted locally at my University, thus i am not able to work on that specific code-base without being able to debug/work on the database.
+
+## Disclaimer 
+This website template is not endorsed by, directly affiliated with, maintained, authorized, or sponsored by any of the products that i have used as placeholders for this website template. All product and company names are the registered trademarks of their original owners. The use of any trade name or trademark is for identification and reference purposes only and does not imply any association with the trademark holder of their product brand.
+##
+### Initial commit: 21/11/2018 by Luke Elam (@dstlny)
+### Latest commit: 01/07/2019 by Luke Elam (@dstlny)
+  
 ## Feature Screenshots.
 ![Login Page](https://raw.githubusercontent.com/dstlny/Project-Management-Web-App/master/images/image01.PNG)
 ![Menu Page](https://raw.githubusercontent.com/dstlny/Project-Management-Web-App/master/images/image02.PNG)
@@ -49,13 +58,3 @@
 ![Staff Page](https://raw.githubusercontent.com/dstlny/Project-Management-Web-App/master/images/image06.PNG)
 ![Order completion message](https://raw.githubusercontent.com/dstlny/Project-Management-Web-App/master/images/image07.PNG)
 ![Current basket message](https://raw.githubusercontent.com/dstlny/Project-Management-Web-App/master/images/image08.PNG)
-
-
-## **Oracle source code has been implemented.**
-- You can find this in the `coffee-shack-source-oracle` folder, however i no longer have access to an installation of Oracle Apex - as this was hosted locally at my University, thus i am not able to work on that specific code-base without being able to debug/work on the database.
-
-## Disclaimer 
-This website template is not endorsed by, directly affiliated with, maintained, authorized, or sponsored by any of the products that i have used as placeholders for this website template. All product and company names are the registered trademarks of their original owners. The use of any trade name or trademark is for identification and reference purposes only and does not imply any association with the trademark holder of their product brand.
-##
-### Initial commit: 21/11/2018 by Luke Elam (@dstlny)
-### Latest commit: 01/07/2019 by Luke Elam (@dstlny)
