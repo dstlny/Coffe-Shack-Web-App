@@ -28,53 +28,9 @@ $obj = new myFunctions();
     });
   } );
 </script>
-
-   
-<!--This script only triggers if the user scrolls up and content hits the header.
-Only here to stop a nasty bug with JQuery accordions ovelapping the header--> 
-<script>
-  // Hide Header on on scroll down
-  var didScroll;
-  var lastScrollTop = 0;
-  var delta = 5;
-  var navbarHeight = $('nav').outerHeight();
-  
-  $(window).scroll(function(event){
-      didScroll = true;
-  });
-  
-  setInterval(function() {
-      if (didScroll) {
-          hasScrolled();
-          didScroll = false;
-      }
-  }, 250);
-  
-  function hasScrolled() {
-      var st = $(this).scrollTop();
-      
-      // Make sure they scroll more than delta
-      if(Math.abs(lastScrollTop - st) <= delta)
-          return;
-      
-      // If they scrolled down and are past the navbar, add class .nav-up.
-      // This is necessary so you never see what is "behind" the navbar.
-      if (st > lastScrollTop && st > navbarHeight){
-          // Scroll Down
-          $('nav').removeClass('nav-down').addClass('nav-up');
-      } else {
-          // Scroll Up
-          if(st + $(window).height() < $(document).height()) {
-              $('nav').removeClass('nav-up').addClass('nav-down');
-          }
-      }
-      
-      lastScrollTop = st;
-  }
-</script>
 </head>
 <!--Header navbar-->
-<nav class="nav-down">
+<nav class="nav-down" style="z-index: 2147483647">
     <a style="float:left; background:#333; color:#fff;pointer-events: none; cursor: default;">COFFEE SHACK</a>
     <?php
        $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";

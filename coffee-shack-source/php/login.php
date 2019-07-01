@@ -3,7 +3,7 @@
   Include our connection to the database.
 */
 include '../dbcon/init.php';
-include 'userClass.php';
+include '../php/userUtilities.php';
 
 if (isset($_POST['subLogin'])) {
     $user = new user();
@@ -11,7 +11,6 @@ if (isset($_POST['subLogin'])) {
     $user->setPass($_POST['txtLogPass']);
 
     $_SESSION['errors'] = array();
-    $hash = password_hash($user->getPass(), 1);
 
     if($user->checkIfDataNotEmpty($user->getEmail(), $user->getPass())){
 
@@ -26,7 +25,6 @@ if (isset($_POST['subLogin'])) {
 
             //Customer nor Staff exists with this email
             $_SESSION['errors']['noRecog'] = "<b style=\"color: red; font-size: 12px;\">Account not recognised!</b>";
-            header("location: ../pages/home.php");
             exit();
 
         }
@@ -34,7 +32,9 @@ if (isset($_POST['subLogin'])) {
     }
 
 } else {
+
     header("location: ../pages/home.php");
     exit();
+    
 }
 ?>

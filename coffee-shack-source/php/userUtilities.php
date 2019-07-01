@@ -109,80 +109,32 @@ class user {
     }
 
     function checkUser($_user, $pass){
-        require '../dbcon/init.php';
-
-        $query  = 'SELECT EmailAddress, User_ID, Password FROM CUSTOMER WHERE EmailAddress = ?';
-        $stmt = mysqli_stmt_init($connection);
-           
-        /*
-          Since email nor password are empty, we can assume all details are present, 
-          thus query the database and see if we got a hit.
-        */
-        if(mysqli_stmt_prepare($stmt, $query)){
-            mysqli_stmt_bind_param($stmt,'s',$_user);
-            mysqli_stmt_execute($stmt);
-            $result = mysqli_stmt_get_result($stmt);
-
-            $rowcount = mysqli_num_rows($result);
-
-            if($rowcount == 0){
-
-                return FALSE;
-
-            } else{
-                $row = mysqli_fetch_assoc($result);
-
-                if(password_verify($pass, $row['Password'])){
-
-                    $this->setLoggedIn(TRUE);
-                    $this->setUser($row['EmailAddress']);
-                    $this->setID($row['User_ID']);
-                    $this->setAdmin(FALSE);
-                    
-                    return TRUE;
- 
-                 } else {
-
-                    $_SESSION['errors']['pass'] = "<b style=\"color: red; font-size: 12px;\">Password doesn't match!</b>";
-                    header("location: ../pages/home.php");
-                    exit();
-
-                }
-
-            }
-        }
-
-    }
-
-    function checkAdmin($_user, $pass){
         include '../dbcon/init.php';
 
-        /*
-            This means the details the user fed us aren't in the CUSTOMER database, 
-            thus check the staff database next to see if we get a hit.
-        */
-        $query  = "SELECT Email_Address, Staff_ID, Password FROM STAFF WHERE Email_Address = ?";
-        $stmt = mysqli_stmt_init($connection);
-        if(mysqli_stmt_prepare($stmt, $query)){
-            mysqli_stmt_bind_param($stmt,'s', $_user);
-            if(mysqli_stmt_execute($stmt)){
-                $result = mysqli_stmt_get_result($stmt);
-                $rowcount = mysqli_num_rows($result);
+        $query  = "SELECT EmailAddress, User_ID, Password FROM CUSTOMER WHERE EmailAddress=?";
+        
+        if($stmt = $sqli->prepare($query)){
 
-                if($rowcount == 0){
+            $stmt->bind_param("s", $_user);
+
+            if($stmt->execute()){
+
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+                $_SESSION['row'] = var_dump($row);
+
+                if($row == NULL){
 
                     return FALSE;
 
-                } else{
-
-                    $row = mysqli_fetch_assoc($result);
+                } else {
 
                     if(password_verify($pass, $row['Password'])){
 
                         $this->setLoggedIn(TRUE);
-                        $this->setUser($row['Email_Address']);
-                        $this->setID($row['Staff_ID']);
-                        $this->setAdmin(TRUE);
+                        $this->setUser($row['EmailAddress']);
+                        $this->setID($row['User_ID']);
+                        $this->setAdmin(false);
 
                         return TRUE;
 
@@ -196,6 +148,59 @@ class user {
 
                 }
             } else{
+
+                $_SESSION['errors']['sqlError'] = "<b style=\"color: red; font-size: 12px;\">An SQL error has occured!</b>";
+                header("location: ../pages/home.php");
+                exit();
+
+            }
+        }
+    }
+
+    function checkAdmin($_user, $pass){
+        require '../dbcon/init.php';
+
+        /*
+            This means the details the user fed us aren't in the CUSTOMER database, 
+            thus check the staff database next to see if we get a hit.
+        */
+        $query = "SELECT Email_Address, Staff_ID, Password FROM STAFF WHERE Email_Address=?";
+
+        if($stmt = $sqli->prepare($query)){
+
+            $stmt->bind_param("s", $_user);
+
+            if($stmt->execute()){
+
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+                var_dump($row);
+
+                if($row == NULL){
+
+                    return FALSE;
+
+                } else{
+
+                    if(password_verify($pass, $row['Password'])){
+
+                        $this->setLoggedIn(TRUE);
+                        $this->setUser($row['Email_Address']);
+                        $this->setID($row['Staff_ID']);
+                        $this->setAdmin(TRUE);
+                        return TRUE;
+
+                    } else{
+
+                        $_SESSION['errors']['pass'] = "<b style=\"color: red; font-size: 12px;\">Password doesn't match!</b>";
+                        header("location: ../pages/home.php");
+                        exit();
+
+                    } 
+
+                }
+            } else{
+
                 $_SESSION['errors']['sqlError'] = "<b style=\"color: red; font-size: 12px;\">An SQL error has occured!</b>";
                 header("location: ../pages/home.php");
                 exit();

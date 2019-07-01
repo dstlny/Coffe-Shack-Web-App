@@ -1,10 +1,17 @@
 <?php
-include '../pages/header.php';
+require '../pages/header.php';
+?>
+<script type="text/javascript">
+    function duplicateItem(){
+            window.alert("This product is already in your basket, you cannot enter duplicates!");
+    }
+</script>
+<?php
 //If this isn't set we know the user isn't signed in, thus we can gracefully redirect them to the home page.
 //Else, user is gained access to the page.
 $user_object = unserialize($_SESSION['user']);
 
-if($user_object->_logged_in == TRUE){
+if($user_object->_logged_in){
    
     //If this session array isn't set then set it.    
     if(!isset($_SESSION['mainOrder'])){    
@@ -12,50 +19,80 @@ if($user_object->_logged_in == TRUE){
     } elseif(!isset($_SESSION['sideOrder'])){    
        $_SESSION['sideOrder'] = array();
     }
-        
-     //if this two GET variables are set, add them onto the session array
+
+     /**
+      * Feel like crashing the Apache instance?
+      * I fucking dare you change this shit.
+      */
     if(isset($_GET['id']) || isset($_GET['bkID'])){
       
         if(isset($_GET['qty'])){
-           //array_push($_SESSION['mainOrder'], array($_GET['id'] => $_GET['qty'])); -- this is slower as it involvescalling the array_push function each time.
-           $_SESSION['mainOrder'][] = array($_GET['id'] => $_GET['qty']); 
-           //-- faster - since we haven't got the overhead of calling a function, we're just appending the ID/QTY to the end.
+
+            if(empty($_SESSION['mainOrder'])){
+
+                $_SESSION['mainOrder'][] = array('_product_id' => (int)$_GET['id'],  '_product_qty' => (int)$_GET['qty']); 
+
+            } else{
+
+                $needle_is_in_haystack = FALSE;
+
+                if(count($_SESSION['mainOrder']) < 4){
+
+                    foreach($_SESSION['mainOrder'] as $key => $item){
+                        if($item['_product_id'] == $_GET['id']){
+                            $needle_is_in_haystack = TRUE;
+                        }
+                    }
+                    
+                    if(!$needle_is_in_haystack){
+                        $_SESSION['mainOrder'][] = array('_product_id' => (int)$_GET['id'],  '_product_qty' => (int)$_GET['qty']); 
+                    } else{
+                        echo'<script type="text/javascript">duplicateItem();</script>';
+                    }
+
+                }
+
+            }
+
         } elseif(isset($_GET['bkQty'])){
-           //array_push($_SESSION['mainOrder'], array($_GET['id'] => $_GET['qty'])); -- this is slower as it involvescalling the array_push function each time.
-           $_SESSION['sideOrder'][] = array($_GET['bkID'] => $_GET['bkQty']);
-           //-- faster - since we haven't got the overhead of calling a function, we're just appending the ID/QTY to the end.
+
+                if(empty($_SESSION['sideOrder'])){
+
+                    $_SESSION['sideOrder'][] = array('_product_id' => (int)$_GET['bkID'], '_product_qty' => (int)$_GET['bkQty']); 
+
+                } else{
+
+                    $needle_is_in_haystack = FALSE;
+
+                    if(count($_SESSION['sideOrder']) < 4){
+
+                        foreach($_SESSION['sideOrder'] as $key => $item){
+                            if($item['_product_id'] == $_GET['bkID']){
+                                $needle_is_in_haystack = TRUE;
+                            }
+                        }
+                        
+                        if(!$needle_is_in_haystack){
+                            $_SESSION['sideOrder'][] = array('_product_id' => (int)$_GET['bkID'],  '_product_qty' => (int)$_GET['bkQty']); 
+                        } else{
+                            echo'<script type="text/javascript">duplicateItem();</script>';
+                        }
+                    }
+                }
+
+            }
+
         }
 
-        header('Location: ../pages/menu.php');
-    } 
-            
-    //Restricting the amount of cofee orders the user can submit to 4 
-    //Relay a simple message stating this.
-    if(isset($_SESSION['mainOrder']) && count($_SESSION['mainOrder']) > 4){
-       echo '<script>alert("You cannot add more than 4 items at a time from the coffee section!");</script>';
-       $index = array_search($_GET['id'], $_SESSION['mainOrder']);
-       array_splice($_SESSION['mainOrder'], $index, 1);
-       header('Location: ../pages/menu.php');
-    }
-
-    //Restricting the amount of orders from the bakery the user can submit to 4.
-    //Relay a simple message stating this.
-    if(isset($_SESSION['sideOrder']) && count($_SESSION['sideOrder']) > 4){
-       echo '<script>alert("You cannot add more than 4 items at a time from the bakery section!");</script>';
-       $index = array_search($_GET['bkID'], $_SESSION['sideOrder']);
-       array_splice($_SESSION['sideOrder'], $index, 1);
-       header('Location: ../pages/menu.php');
-    }
-    
     //Clears necccessary session variables
     if(isset($_GET['ClearAll'])){
-       $_SESSION['mainOrder'] = array();
-       $_SESSION['sideOrder'] = array();
-       unset($_SESSION['ordered']);
-       unset($_SESSION['orderID']);
-       unset($_SESSION['orderTotal']);
-       unset($_SESSION['mainOrder']);
-       unset($_SESSION['sideOrder']);
+        $_SESSION['mainOrder'] = array();
+        $_SESSION['sideOrder'] = array();
+        unset($_SESSION['ordered']);
+        unset($_SESSION['orderID']);
+        unset($_SESSION['orderTotal']);
+        unset($_SESSION['mainOrder']);
+        unset($_SESSION['sideOrder']);
     }
     ?>
     <!--JQuery accordion-->
@@ -122,17 +159,34 @@ if($user_object->_logged_in == TRUE){
             </div>
         </div>
     </div>
-    <?php              
+    <?php  
+        if(!isset($_SESSION['ordered'])){            
             if(!empty($_SESSION['mainOrder']) || !empty($_SESSION['sideOrder'])){
-                echo '<div id="basket-accordion">';
-                echo '  <h3>Current Basket</h3><div>';
+                echo "<div id=\"basket-accordion\"><h3>Current Basket</h3><div>";
                 $obj->printBasket();
             }
-                echo '</div>';
+                echo '</div><br>';
+        } else{
             ?>
+            <script>
+            $(function() {
+                $("#basket-accordion").accordion({
+                collapsible: false,
+                heightStyle: 'content',
+                active: true
+                });
+            } );
+            </script>
+            <?=
+            "<div id=\"basket-accordion\"><h3>Current Basket</h3><div>You have already ordered!<br>To access your current order please click \"Current Order\" at the bottom. Or alternatively, click <a href='../php/payment.php'>this link</a></div></div>";
+        }
+            ?>   
     <?php 
 } else{
+
     header('Location: ../pages/home.php');
+
 }
-include '../pages/footer.php';
+
+require '../pages/footer.php';
 ?>

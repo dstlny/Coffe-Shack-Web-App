@@ -1,6 +1,6 @@
 <?php
 include '../dbcon/init.php';
-include '../php/userClass.php';
+include '../php/userUtilities.php';
 
 //If the register button has been clicked, proceed
 if(isset($_POST['register'])){

@@ -3,15 +3,15 @@
 
    $user_object = unserialize($_SESSION['user']);
 
-   if($user_object->_admin == TRUE && $user_object->_logged_in == TRUE){
+   if($user_object->_admin && $user_object->_logged_in){
 
       echo '<meta http-equiv="Refresh" content="30">';
       $answer = $obj->checkOrders();
       
-      if($answer == TRUE){
+      if($answer){
          $obj->printCustomerOrders();
       } else {
-         echo '<p>Currently no orders to processs....</p>';
+         echo '<p style="font-size:20px;" class="loading">Currently no orders to process<span>.</span><span>.</span><span>.</span></p>';
       }
 
    } else {
@@ -19,5 +19,6 @@
       echo '<meta http-equiv="refresh" content="0;URL="../home.php"/>';
 
    }
+
    require_once 'footer.php';
 ?>

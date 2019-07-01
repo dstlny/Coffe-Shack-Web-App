@@ -3,10 +3,10 @@
 
     $user_object = unserialize($_SESSION['user']);
 
-    if($user_object->_admin == FALSE){
-       require_once '../php/login-form.php';
-    } elseif($user_object->_admin == TRUE){
-       header('Location: ../pages/staffPage.php');
+    if(!$user_object->_admin){
+      require_once '../php/login-form.php';
+    } elseif($user_object->_admin){
+      header('Location: ../pages/staffPage.php');
     } else {
        require_once '../php/login-form.php';
     }

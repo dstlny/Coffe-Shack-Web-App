@@ -1,4 +1,5 @@
 <?php 
 session_start();
-$connection = mysqli_connect('','', '', '') or exit("Unable to connect to database!");
+//localhost, root, null, c3518706
+$sqli = new mysqli('localhost','root', '', 'c3518706');
 ?>
