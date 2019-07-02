@@ -121,9 +121,8 @@ class user {
 
                 $result = $stmt->get_result();
                 $row = $result->fetch_assoc();
-                $_SESSION['row'] = var_dump($row);
 
-                if($row == NULL){
+                if($row == NULL || $row->num_rows == 0){
 
                     return FALSE;
 
@@ -174,9 +173,8 @@ class user {
 
                 $result = $stmt->get_result();
                 $row = $result->fetch_assoc();
-                var_dump($row);
 
-                if($row == NULL){
+                if($row == NULL || $row->num_rows == 0){
 
                     return FALSE;
 
@@ -188,6 +186,7 @@ class user {
                         $this->setUser($row['Email_Address']);
                         $this->setID($row['Staff_ID']);
                         $this->setAdmin(TRUE);
+                        
                         return TRUE;
 
                     } else{
