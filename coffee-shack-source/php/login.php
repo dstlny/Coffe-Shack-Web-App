@@ -25,6 +25,7 @@ if (isset($_POST['subLogin'])) {
 
             //Customer nor Staff exists with this email
             $_SESSION['errors']['noRecog'] = "<b style=\"color: red; font-size: 12px;\">Account not recognised!</b>";
+            header("location: ../pages/home.php");
             exit();
 
         }

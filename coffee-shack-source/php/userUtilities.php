@@ -106,6 +106,7 @@ class user {
         } else {
             return TRUE;
         }
+
     }
 
     function checkUser($_user, $pass){
@@ -122,7 +123,7 @@ class user {
                 $result = $stmt->get_result();
                 $row = $result->fetch_assoc();
 
-                if($row == NULL || $row->num_rows == 0){
+                if($result->num_rows == 0){
 
                     return FALSE;
 
@@ -174,7 +175,7 @@ class user {
                 $result = $stmt->get_result();
                 $row = $result->fetch_assoc();
 
-                if($row == NULL || $row->num_rows == 0){
+                if($result->num_rows == 0){
 
                     return FALSE;
 

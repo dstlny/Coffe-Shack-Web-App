@@ -20,27 +20,28 @@ if(isset($_POST['register'])){
         // Prepare an insert statement
         $sql = "INSERT INTO CUSTOMER (User_ID, User_Forname, User_Surname, EmailAddress, Password) VALUES (?,?,?,?,?)";
 
-        if($stmt = mysqli_prepare($connection, $sql)){
+        if($stmt = $sqli->prepare($sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "sssss", $user_details->getID(),$user_details->getUserFirstName(),$user_details->getUserSecondName(), $user_details->getEmail(), password_hash($user_details->getPass(), 1));
+            $stmt->bind_param("sssss", $user_details->getID(),$user_details->getUserFirstName(),$user_details->getUserSecondName(), $user_details->getEmail(), password_hash($user_details->getPass(), 1));
             // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
+            if($stmt->execute()){
                 $error_check['registration'] = "<b style=\"color: green; font-size: 12px;\">Registration was a success</b>";
                 $_SESSION['errors'] = $error_check;
-                mysqli_stmt_close($stmt);
+                $_SESSION['user'] = serialize($user_details->getUserObject());
+                $sqli->close($sql);
                 header("location: register-form.php");
                 exit();
             } else{
                 $error_check['sqlError'] = "<b style=\"color: red; font-size: 12px;\">An SQL error occured!</b>";
                 $_SESSION['errors'] = $error_check;
-                mysqli_stmt_close($stmt);
+                $sqli->close($sql);
                 header("location: register-form.php");
                 exit();
             }
         }
 
         //When all is done close the connection to the database and redirect the user to the appropriate page
-        mysqli_stmt_close($stmt);
+        $sqli->close($sql);
         header("location: register-form.php");
         exit();
 
@@ -51,9 +52,10 @@ if(isset($_POST['register'])){
 }    
 
 class register_new_user {
+    
 
     function checkAllFormData(user $user_details_object){
-
+    
         //Error_check is an array that wiull store all the errors that the user can potentially have when registering
         $error_check = array();
         //Unsetting the $-SESSION[['errors'] array.
@@ -104,20 +106,25 @@ class register_new_user {
                 } elseif(!filter_var($user_details_object->getEmail(), FILTER_VALIDATE_EMAIL)){
                     $error_check['email'] = "<b style=\"color: red; font-size: 12px;\">Email is of incorrect format!</b>";
                 } else {
-                        // Prepare a select statement
-                    $sql = "SELECT * FROM CUSTOMER WHERE EmailAddress = ?";
-                    if($stmt = mysqli_prepare($connection, $sql)){
+                    include '../dbcon/init.php';
+                    // Prepare a select statement
+                    $sql = "SELECT * FROM CUSTOMER WHERE EmailAddress=?";
+
+                    if($stmt = $sqli->prepare($sql)){
                         // Set parameters
                         $param_email = $user_details_object->getEmail();
                         // Bind variables to the prepared statement as parameters
-                        mysqli_stmt_bind_param($stmt, "s", $param_email);
+                        $stmt->bind_param("s", $param_email);
                         
                         // Attempt to execute the prepared statement
-                        if(mysqli_stmt_execute($stmt)){
+                        if($stmt->execute()){
+
                             /* store result */
-                            mysqli_stmt_store_result($stmt);
+                            $result = $stmt->get_result();
+                            $row = $result->fetch_assoc();
+
                             //Checking if we have any hits from the DB, if we do a user exists with that email, else they don't. Error as according.
-                            if(mysqli_stmt_num_rows($stmt)  > 0){
+                            if($result->num_rows > 0){
                                 $error_check['email'] = "<b style=\"color: red; font-size: 12px;\">Email aleady registered!</b>";
                                 $_SESSION['errors'] = $error_check;
                                 header("location: register-form.php");
@@ -136,6 +143,11 @@ class register_new_user {
                             header("location: register-form.php");
                             exit();
                         }
+                    } else {
+                        $error_check['sqlError'] = "<b style=\"color: red; font-size: 12px;\">An SQL error occured!</b>";
+                        $_SESSION['errors'] = $error_check;
+                        header("location: register-form.php");
+                        exit();
                     }
                 }
             }

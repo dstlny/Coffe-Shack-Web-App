@@ -32,6 +32,7 @@ if(isset($_POST['sub_pass'])){
 
                     $sqli->query($query);
                     $sqli->close();
+                    echo '<p style="color:green;">Password updated successfully!</p>';
 
                 }
 

@@ -1,23 +1,22 @@
+<?php $user_object = unserialize($_SESSION['user']);?>
 <div class="register-container" style="text-align: center;">
     <div style="display:inline-block;">
         <form method="post" action="../php/register-form.php">
             <p style="padding-right: 10px;font-size: 12px; float: left;">Don't have an account?<br>Don't worry, sign up!</p><button style="width: 80px; font-size:12px; padding:4px; margin-top:15px; height: 30px;" type="submit" name="register" class="register">Register</button>
         </form>
-        <form method="post" action="../php/login.php" autocomplete="off">
+        <form method="post" action="../php/login.php">
             <fieldset>
                 <legend>Login</legend>
-                <input type="text" placeholder="Email" name="txtLogEmail" class="registration-input"><?php
-                        echo (isset($_SESSION['errors']['email']) || isset($_SESSION['errors']['loginEmpty'])) ? "<b style=\"color: red; font-size: 13px;\">*</b>" : NULL;
-                    ?><br>
+                <input type="text" placeholder="Email" name="txtLogEmail" class="registration-input"  autocomplete="username" value="<?=(isset($user_object->_mailuid)) ? $user_object->_mailuid : NULL;?>">
+                    <?=(isset($_SESSION['errors']['email']) || isset($_SESSION['errors']['loginEmpty'])) ? "<b style=\"color: red; font-size: 13px;\">*</b>" : NULL;?><br>
                     <?php
                         if(isset($_SESSION['errors']['email'])){
                             echo $_SESSION['errors']['email'].'<br>';
                             unset($_SESSION['errors']['email']);
                         }
                     ?>
-                <input type="password" placeholder="Password" name="txtLogPass" class="registration-input"><?php
-                        echo (isset($_SESSION['errors']['pass']) || isset($_SESSION['errors']['loginEmpty'])) ? "<b style=\"color: red; font-size: 13px;\">*</b>" : NULL;
-                    ?><br>
+                <input type="password" placeholder="Password" name="txtLogPass" class="registration-input">
+                    <?=(isset($_SESSION['errors']['pass']) || isset($_SESSION['errors']['loginEmpty'])) ? "<b style=\"color: red; font-size: 13px;\">*</b>" : NULL;?><br>
                     <?php
                         if(isset($_SESSION['errors']['pass'])){
                             echo $_SESSION['errors']['pass'].'<br>';

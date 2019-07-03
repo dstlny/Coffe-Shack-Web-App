@@ -93,13 +93,8 @@
                         if(isset($_SESSION['errors']['registration'])){
                            echo "<br>{$_SESSION['errors']['registration']}";
                            echo '<p style="font-size:12px;" class="loading">Redirecting to login<span>.</span><span>.</span><span>.</span></p>';
-                            
-                            if(isset($_SESSION['errors']['success'])){
-                                sleep(1);
-                                echo "<meta http-equiv='Refresh' content='2; URL=../pages/home.php'>";
-                                unset($_SESSION['errors']['registration']);
-                            }
-                            
+                           echo "<meta http-equiv='Refresh' content='2; URL=../pages/home.php'>";
+                           unset($_SESSION['errors']['registration']);
                         } elseif(isset($_SESSION['errors']['Allempty'])){
                            echo $_SESSION['errors']['Allempty'];
                            unset($_SESSION['errors']['Allempty']);

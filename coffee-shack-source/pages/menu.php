@@ -3,7 +3,7 @@ require '../pages/header.php';
 ?>
 <script type="text/javascript">
     function duplicateItem(){
-            window.alert("This product is already in your basket, you cannot enter duplicates!");
+        window.alert("This product is already in your basket, you cannot enter duplicates!");
     }
 </script>
 <?php
@@ -47,6 +47,8 @@ if($user_object->_logged_in){
                     if(!$needle_is_in_haystack){
                         $_SESSION['mainOrder'][] = array('_product_id' => (int)$_GET['id'],  '_product_qty' => (int)$_GET['qty']); 
                     } else{
+                        unset($_GET['qty']);
+                        unset($_GET['id']);
                         echo'<script type="text/javascript">duplicateItem();</script>';
                     }
 
@@ -75,6 +77,8 @@ if($user_object->_logged_in){
                         if(!$needle_is_in_haystack){
                             $_SESSION['sideOrder'][] = array('_product_id' => (int)$_GET['bkID'],  '_product_qty' => (int)$_GET['bkQty']); 
                         } else{
+                            unset($_GET['bkQty']);
+                            unset($_GET['bkID']);
                             echo'<script type="text/javascript">duplicateItem();</script>';
                         }
                     }
@@ -171,9 +175,9 @@ if($user_object->_logged_in){
             <script>
             $(function() {
                 $("#basket-accordion").accordion({
-                collapsible: false,
-                heightStyle: 'content',
-                active: true
+                    collapsible: false,
+                    heightStyle: 'content',
+                    active: true
                 });
             } );
             </script>
