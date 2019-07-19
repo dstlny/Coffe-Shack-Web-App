@@ -40,6 +40,173 @@
   - `returnCurrID()` - returns the largest OrderID (current).
   - `checkOrders()` - returns `true` if incomplete orders exist, `false` if not
   
+ ##  Example database structure:
+ `--
+-- Database: c3518706
+--
+CREATE DATABASE IF NOT EXISTS c3518706 DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE c3518706;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table customer
+--
+
+CREATE TABLE customer (
+  User_ID int(11) NOT NULL,
+  User_Forname varchar(30) NOT NULL,
+  User_Surname varchar(30) NOT NULL,
+  EmailAddress varchar(50) NOT NULL,
+  Password varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table orders
+--
+
+CREATE TABLE orders (
+  Order_ID int(11) NOT NULL,
+  Order_Total decimal(10,2) NOT NULL,
+  Order_Timestamp timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  Order_Complete char(1) NOT NULL,
+  Table_No int(2) NOT NULL,
+  fk1_User_ID int(11) NOT NULL,
+  fk2_Staff_ID int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table order_items
+--
+
+CREATE TABLE order_items (
+  Order_Items_ID int(11) NOT NULL,
+  Quantity int(11) NOT NULL,
+  fk1_Product_ID int(11) NOT NULL,
+  fk2_Order_ID int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table product
+--
+
+CREATE TABLE product (
+  Product_ID int(11) NOT NULL,
+  Product_Name varchar(30) NOT NULL,
+  Product_Cat varchar(20) NOT NULL,
+  Price decimal(6,2) NOT NULL,
+  Product_Image varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table product
+--
+
+INSERT INTO product VALUES
+(1, 'Caffe Latte', 'Coffee_Latte', '3.50', 'Latte1-min.jpg'),
+(2, 'Flat White', 'Coffee_Latte', '4.00', 'Latte2-min.jpg'),
+(3, 'Caffe Mocha', 'Coffee_Mocha', '3.50', 'Mocha1-min.jpg'),
+(4, 'White Chocolate Mocha', 'Coffee_Mocha', '3.50', 'Mocha2-min.jpg'),
+(5, 'Latte Macchiato', 'Coffee_Macchiato', '3.20', 'Macchiato1-min.jpg'),
+(6, 'Caramel Macchiato', 'Coffee_Macchiato', '2.40', 'Macchiato2-min.jpg'),
+(7, 'Cappuccino', 'Coffee_Cappuccino', '3.00', 'Cappucino1-min.jpg'),
+(8, 'Caffe Americano', 'Coffee_Americano', '3.30', 'Americano1-min.jpg'),
+(9, 'Cortado', 'Coffee_Espresso', '3.20', 'Espresso1-min.jpg'),
+(10, 'Espresso', 'Coffee_Espresso', '4.50', 'Espresso2-min.jpg'),
+(11, 'Espresso Macchiato', 'Coffee_Espresso', '3.40', 'Espresso3-min.jpg'),
+(12, 'Banana Bread', 'Bakery', '1.20', 'Bakery1-min.jpg'),
+(13, 'Blueberry Muffin', 'Bakery', '1.00', 'Bakery2-min.jpg'),
+(14, 'Caramel Shortbread', 'Bakery', '0.90', 'Bakery3-min.jpg'),
+(15, 'Carrot Cake', 'Bakery', '1.20', 'Bakery4-min.jpg'),
+(16, 'Lemon Loaf', 'Bakery', '0.90', 'Bakery6-min.jpg'),
+(17, 'Triple Choc Muffin', 'Bakery', '0.70', 'Bakery7-min.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table staff
+--
+
+CREATE TABLE staff (
+  Staff_ID int(11) NOT NULL,
+  Email_Address varchar(30) NOT NULL,
+  Password varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table staff
+--
+
+INSERT INTO staff VALUES
+(0, 'admin@coffeeshack.org', '$2y$10$Gv0MgMaMSJ.ulY2MQwzagObqshTzrcw4qjqTYrV5BTUqk32urfR6K');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table customer
+--
+ALTER TABLE customer
+  ADD UNIQUE KEY User_ID (User_ID);
+
+--
+-- Indexes for table orders
+--
+ALTER TABLE orders
+  ADD UNIQUE KEY Order_ID (Order_ID);
+
+--
+-- Indexes for table order_items
+--
+ALTER TABLE order_items
+  ADD UNIQUE KEY Order_Items_ID (Order_Items_ID);
+
+--
+-- Indexes for table product
+--
+ALTER TABLE product
+  ADD UNIQUE KEY Product_ID (Product_ID);
+
+--
+-- Indexes for table staff
+--
+ALTER TABLE staff
+  ADD UNIQUE KEY Staff_ID (Staff_ID);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table customer
+--
+ALTER TABLE customer
+  MODIFY User_ID int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT for table orders
+--
+ALTER TABLE orders
+  MODIFY Order_ID int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT for table order_items
+--
+ALTER TABLE order_items
+  MODIFY Order_Items_ID int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+COMMIT;
+`
+  
 ## **Oracle source code has been implemented.**
 - You can find this in the `coffee-shack-source-oracle` folder, however i no longer have access to an installation of Oracle Apex - as this was hosted locally at my University, thus i am not able to work on that specific code-base without being able to debug/work on the database.
 
