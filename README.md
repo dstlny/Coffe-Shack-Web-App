@@ -137,9 +137,9 @@ CREATE TABLE staff (
 --
 -- Dumping data for table staff
 --
--- Default password = SecurePassword1234!, though can be changed
+-- Default password = DefaultPassword01, though can be changed through account page.
 INSERT INTO staff VALUES
-(0, 'admin@coffeeshack.org', '$2y$10$Gv0MgMaMSJ.ulY2MQwzagObqshTzrcw4qjqTYrV5BTUqk32urfR6K');
+(0, 'admin@coffeeshack.org', '$2y$10$bpVsjeSQDyWrOe5e8eLYb.uJQME5XtRMgbvvvCbMSk5ju7WhBjlMy');
 
 -- --------------------------------------------------------
 --
