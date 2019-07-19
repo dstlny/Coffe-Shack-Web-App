@@ -48,7 +48,6 @@ CREATE DATABASE IF NOT EXISTS c3518706 DEFAULT CHARACTER SET latin1 COLLATE lati
 USE c3518706;
 
 -- --------------------------------------------------------
-
 --
 -- Table structure for table customer
 --
@@ -61,10 +60,7 @@ CREATE TABLE customer (
   Password varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-
-
 -- --------------------------------------------------------
-
 --
 -- Table structure for table orders
 --
@@ -78,7 +74,6 @@ CREATE TABLE orders (
   fk1_User_ID int(11) NOT NULL,
   fk2_Staff_ID int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 
 -- --------------------------------------------------------
 
@@ -94,7 +89,6 @@ CREATE TABLE order_items (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
-
 --
 -- Table structure for table product
 --
@@ -148,6 +142,7 @@ CREATE TABLE staff (
 
 INSERT INTO staff VALUES
 (0, 'admin@coffeeshack.org', '$2y$10$Gv0MgMaMSJ.ulY2MQwzagObqshTzrcw4qjqTYrV5BTUqk32urfR6K');
+-- --------------------------------------------------------
 
 --
 -- Indexes for dumped tables
