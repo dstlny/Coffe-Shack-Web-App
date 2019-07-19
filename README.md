@@ -41,7 +41,7 @@
   - `checkOrders()` - returns `true` if incomplete orders exist, `false` if not
   
  ##  Example database structure:
- `--
+ ```sql
 -- Database: c3518706
 --
 CREATE DATABASE IF NOT EXISTS c3518706 DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
@@ -205,7 +205,7 @@ ALTER TABLE orders
 ALTER TABLE order_items
   MODIFY Order_Items_ID int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 COMMIT;
-`
+```
   
 ## **Oracle source code has been implemented.**
 - You can find this in the `coffee-shack-source-oracle` folder, however i no longer have access to an installation of Oracle Apex - as this was hosted locally at my University, thus i am not able to work on that specific code-base without being able to debug/work on the database.
