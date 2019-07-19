@@ -76,7 +76,6 @@ CREATE TABLE orders (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
-
 --
 -- Table structure for table order_items
 --
@@ -125,7 +124,6 @@ INSERT INTO product VALUES
 (17, 'Triple Choc Muffin', 'Bakery', '0.70', 'Bakery7-min.jpg');
 
 -- --------------------------------------------------------
-
 --
 -- Table structure for table staff
 --
@@ -142,8 +140,8 @@ CREATE TABLE staff (
 
 INSERT INTO staff VALUES
 (0, 'admin@coffeeshack.org', '$2y$10$Gv0MgMaMSJ.ulY2MQwzagObqshTzrcw4qjqTYrV5BTUqk32urfR6K');
--- --------------------------------------------------------
 
+-- --------------------------------------------------------
 --
 -- Indexes for dumped tables
 --
@@ -177,7 +175,8 @@ ALTER TABLE product
 --
 ALTER TABLE staff
   ADD UNIQUE KEY Staff_ID (Staff_ID);
-
+  
+-- --------------------------------------------------------
 --
 -- AUTO_INCREMENT for dumped tables
 --
